@@ -1,5 +1,27 @@
 <template>
-  <div class="nav-top">
+  <div class="nav-top" v-if="IsPC()">
+    <div class="logo" v-if="SKIN == 2" :style="{'background-image':'url('+staticLogo+')'}"></div>
+    <div class="logo-box" v-if="SKIN == 3">
+        <div class="logo" :style="{'background-image':'url('+staticLogo+')'}"></div>
+    </div>
+    <ul class="nav-list" v-if="IsPC()">
+        <li v-for="item in navList"  :key="item.name" :class="{'active': item.flag}" @click.stop="toItem(item)">
+            <router-link :to="item.to.name">
+                {{item.name}}
+                <i v-if="item.sub && !item.hideSub"  class="icon-nav"></i>
+            </router-link>
+
+            <ul v-if="item.sub && !item.hideSub" class="nav-dropdown" :class="{'open':item.open}" @click.stop>
+                <li v-for="sub in item.sub" :key="sub.name">
+                    <router-link :to="sub.to">
+                        {{sub.name}}
+                    </router-link>
+                </li>               
+            </ul>
+        </li>
+    </ul>
+  </div>
+  <div class="mobile-nav-top" v-else>
     <div class="logo" v-if="SKIN == 2" :style="{'background-image':'url('+staticLogo+')'}"></div>
     <div class="logo-box" v-if="SKIN == 3">
         <div class="logo" :style="{'background-image':'url('+staticLogo+')'}"></div>
@@ -42,6 +64,20 @@ export default {
         },
     },
     methods: {
+        IsPC() {
+            var userAgentInfo = navigator.userAgent;
+            var Agents = ["Android", "iPhone",
+                    "SymbianOS", "Windows Phone",
+                    "iPad", "iPod"];
+            var flag = true;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                flag = false;
+                break;
+                }
+            }
+            return flag;
+        },
         // 根据路由获取当前active
         initCurrent() {
             var firstNav = this.navList;

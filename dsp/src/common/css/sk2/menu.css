@@ -74,3 +74,86 @@
 .nav-top .nav-list > li.active .nav-dropdown {
   display: block;
 }
+.mobile-nav-top {
+  width: 100%;
+  background-color: #ffffff;
+  padding-top: 26px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 80px;
+}
+.mobile-nav-top .logo {
+  width: 170px;
+  height: 48px;
+  margin: 0 auto;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  margin-bottom: 26px;
+  float: left;
+}
+.mobile-nav-top .nav-list {
+  width: 15%;
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 50px;
+  background-color: #ffffff;
+  z-index: 9999;
+}
+.mobile-nav-top .nav-list > li {
+  width: 100%;
+  line-height: 60px;
+}
+.mobile-nav-top .nav-list > li > a {
+  width: 100%;
+  height: 60px;
+  display: block;
+  color: #000000;
+  padding-left: 30px;
+  font-size: 12px;
+}
+.mobile-nav-top .nav-list > li > a .icon-nav {
+  width: 10px;
+  height: 5px;
+  float: right;
+  margin-top: 28px;
+  margin-right: 20px;
+  line-height: 60px;
+  background: url('../../img/sk2-images/icon_nav.png') no-repeat bottom;
+}
+.mobile-nav-top .nav-list > li .nav-dropdown {
+  display: none;
+  background-color: #fafafa;
+}
+.mobile-nav-top .nav-list > li .nav-dropdown > li {
+  height: 60px;
+  line-height: 60px;
+}
+.mobile-nav-top .nav-list > li .nav-dropdown > li a {
+  padding-left: 47px;
+  position: relative;
+  display: block;
+  color: #000000;
+  height: 100%;
+}
+.mobile-nav-top .nav-list > li .nav-dropdown > li a.active:before {
+  content: '';
+  width: 6px;
+  height: 60px;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background-color: #04a2b3;
+}
+.mobile-nav-top .nav-list > li.active > a {
+  color: #ffffff;
+  background-color: #04a2b3;
+}
+.mobile-nav-top .nav-list > li.active > a .icon-nav {
+  background-position: top;
+}
+.mobile-nav-top .nav-list > li.active .nav-dropdown {
+  display: block;
+}

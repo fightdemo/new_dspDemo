@@ -27,8 +27,22 @@ export default {
   },
   mounted(){
     this.getuserInfo();
+    if( this.SKIN == '1' && this.judgePlatform() ){
+      document.getElementsByClassName('component_con')[0].style.marginTop = 175 + 'px';
+    }
+    if( this.SKIN == '2' && this.judgePlatform() ){
+      document.getElementsByClassName('component_con')[0].style.paddingLeft = 0 + 'px';
+      document.getElementsByClassName('component_con')[0].style.marginTop = 175 + 'px';
+    }
   },
   methods:{
+    judgePlatform(){
+      if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+          return true;
+      }else{
+        return false;
+      }
+    },
     getuserInfo(){
       this.$ajax({
         url: '/dsp/UserInfo',
