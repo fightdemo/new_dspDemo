@@ -3,14 +3,14 @@
         <div class="nav-left" ref="navleft" v-if="IsPC()">
             <div class="nav-logo-box">
                 <div class="nav-logo" :style="'background-image: url('+staticLogo+');'"></div>
-                <i class="btn-silder" @click="toggleSilder()"></i>
+                <!-- <i class="btn-silder" @click="toggleSilder()"></i> -->
             </div>
             <div :style="{'overflow': !silderFlag ? 'hidden' : ''}">
                 <div :style="{'height': wrapHeight + 'px', 'margin-right': !silderFlag ? '-17px' : '', 'overflow-y': !silderFlag ? 'scroll' : '' }" ref="wrap" @scroll="handleScroll" @mouseover="scrollbarShow=true" @mouseleave="scrollbarShow=false">
                     <ul class="nav-list">
                         <li v-for="item in navList"  :key="item.name"  :class="{'open':item.open, 'active': item.flag}" @click.stop="toitem(item)">
                             <a href="javascript:;">
-                                <i class="icon mb" :class="item.icon"></i>
+                                <!-- <i class="icon mb" :class="item.icon"></i> -->
                                 <span class="nav-name">{{item.name}}</span>
                                 <i v-if="item.sub && !item.hideSub" @click.stop="toggle(item)" class="icon fa fa-angle-right"></i>
                             </a>
@@ -18,6 +18,7 @@
                             <ul v-if="item.sub && !item.hideSub" class="nav-sub-list" @click.stop>
                                 <!-- <li v-for="(sub,subi) in item.sub" :key="sub.name" @click="seconed(sub,subi)"> -->
                                     <router-link :to="sub.to" v-for="sub in item.sub" :key="sub.name">
+                                        <div class="active-box"></div>
                                         <!-- <a href="javascript:;" :class="{'active': subIndex == subi}"> -->
                                             {{sub.name}}
                                             <i class="icon-disc"></i>
@@ -97,19 +98,20 @@
             </div>
             <ul class="user-info-box fr cl" ref="userInfoBox">
                 <li class="user-balance">账户余额(元)：{{balance|number}}</li>
-                <li>
+                <!-- <li>
                     <div class="user-avatar">
                         <i class="icon fa fa-user"></i>
                     </div>
-                </li>
+                </li> -->
                 <li class="user-box" ref='userBox'>
                     <p class="user-account" :title="userInfo.loginName">{{userInfo.loginName}}</p>
-                    <p :title="userInfo.name">{{userInfo.name}}</p>
+                    <!-- <p :title="userInfo.name">{{userInfo.name}}</p> -->
                 </li>
                 <li v-if="canLogout">
-                    <el-button type="danger" class="logout" @click="logout()">
-                        <i class="icon fa fa-sign-out"></i>退出
-                    </el-button>
+                    <div class="logout" @click="logout()"></div>
+                    <!-- <el-button type="danger" class="logout" @click="logout()"> -->
+                        <!-- <i class="icon fa fa-sign-out"></i>退出 -->
+                    <!-- </el-button> -->
                 </li>
             </ul>
         </div>
@@ -133,9 +135,9 @@ export default {
         staticLogo() {
             if( !this.silderFlag ){
                 if( this.getUserInfo && this.getUserInfo.loginName == 'admin' ){
-                    return require("@/common/img/nav-logo2.png")
+                    return require("@/common/img/logo.png")
                 }else{
-                    return this.$store.state.common.oem.staticLogo || require("@/common/img/nav-logo2.png")
+                    return this.$store.state.common.oem.staticLogo || require("@/common/img/logo.png")
                 }
             }else{
                 if( this.getUserInfo && this.getUserInfo.loginName == 'admin' ){
@@ -239,14 +241,14 @@ export default {
             }            
             this.$nextTick(this.update)
         },
-        toggleSilder() {
-            this.silderFlag = !this.silderFlag;
-            if( this.IsPC() ){
-                document.body.style.paddingLeft = this.silderFlag
-                    ? "120px"
-                    : "290px";
-            }
-        },
+        // toggleSilder() {
+        //     this.silderFlag = !this.silderFlag;
+        //     if( this.IsPC() ){
+        //         document.body.style.paddingLeft = this.silderFlag
+        //             ? "120px"
+        //             : "290px";
+        //     }
+        // },
         // showSecondNav(item, index) {
         //     if (this.silderFlag) {
         //         // 显示二级导航栏弹框

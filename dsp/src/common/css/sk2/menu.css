@@ -29,6 +29,7 @@
   display: block;
   color: #000000;
   padding-left: 30px;
+  font-size: 12px;
 }
 .nav-top .nav-list > li > a .icon-nav {
   width: 10px;

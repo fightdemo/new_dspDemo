@@ -1,0 +1,89 @@
+.pagination-wrap-sk {
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+}
+.pagination-wrap-sk .pagination {
+  width: 100%;
+}
+.pagination-wrap-sk .pagination .l,
+.pagination-wrap-sk .pagination .r {
+  height: 30px;
+  line-height: 30px;
+}
+.pagination-wrap-sk .pagination .l {
+  float: left;
+}
+.pagination-wrap-sk .pagination .r {
+  float: right;
+}
+.pagination-wrap-sk .pagination .pager {
+  margin: 0 auto;
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+}
+.pagination-wrap-sk .pagination .pager .number {
+  float: left;
+  width: 28px;
+  height: 28px;
+  margin-left: 14px;
+  font-size: 12px;
+  cursor: pointer;
+  background-color: #4D5C6E;
+  border-radius: 50%;
+}
+.pagination-wrap-sk .pagination .pager .number:hover {
+  background-color: #fff;
+  color: #000;
+}
+.pagination-wrap-sk .pagination .pager .active {
+  color: #000;
+  background-color: #fff;
+}
+.pagination-wrap-sk .pagination .btn {
+  width: 62px;
+  height: 30px;
+  border: none;
+  padding: 0;
+  outline: 0;
+  vertical-align: middle;
+  margin-left: 14px;
+  cursor: pointer;
+  background-size: cover;
+}
+.pagination-wrap-sk .pagination .btn-quickprev-disabled,
+.pagination-wrap-sk .pagination .btn-prev-disabled,
+.pagination-wrap-sk .pagination .btn-next-disabled,
+.pagination-wrap-sk .pagination .btn-quicknext-disabled {
+  background-color: #f6f6f6;
+  cursor: default;
+  border: none;
+  color: #ddd;
+}
+.pagination-wrap-sk .pagination .btn-quickprev,
+.pagination-wrap-sk .pagination .btn-prev,
+.pagination-wrap-sk .pagination .btn-next,
+.pagination-wrap-sk .pagination .btn-quicknext {
+  background-color: #ffffff;
+  color: #000000;
+}
+.pagination-wrap-sk .pagination .btn-prev-first {
+  border-radius: 14px 0 0 14px;
+  border-right: 1px solid #ccc;
+}
+.pagination-wrap-sk .pagination .btn-prev-top {
+  border-radius: 0 14px 14px 0;
+  margin-left: 0;
+}
+.pagination-wrap-sk .pagination .pagination_sizes {
+  width: 123px;
+  height: 30px;
+  border-radius: 14px;
+  margin-left: 14px;
+  color: #666;
+  background: #fff;
+  border: 1px solid #ddd;
+  padding-left: 10px;
+  font-size: 12px;
+}

@@ -1,9 +1,11 @@
 <template>
   <div id="app">
-    <Menu :navList='navList'></Menu>
-    <div class="component_con">
+    <Menu :navList='navList'  v-if="SKIN == 2"></Menu>
+    <Nav v-if='SKIN == 1' :navList='navList' :userInfo='nameInfo'></Nav>
+    <!-- <NavSk v-if="SKIN == 2" :navList='navList' :userInfo='nameInfo'></NavSk> -->
+    <div class="component_con" :style="SKIN == '2' ? 'padding-left:16%;background-color: #2A323C;' : ''">
       <div class="content-box">
-        <MenuTool></MenuTool>
+        <MenuTool  v-if="SKIN == 2"></MenuTool>
         <router-view></router-view>
       </div>
     </div>
@@ -13,6 +15,8 @@
 import navList from "./router/navList";
 import Menu from "@/common/components/Menu";
 import MenuTool from "@/common/components/MenuTool";
+import Nav from "@/common/components/Nav";
+import NavSk from "@/common/components/Nav-sk";
 export default {
   name: 'App',
   data(){
@@ -39,7 +43,9 @@ export default {
   },
   components:{
     'Menu':Menu,
-    'MenuTool': MenuTool
+    'MenuTool': MenuTool,
+    'Nav':Nav,
+    'NavSk': NavSk
   }
 }
 </script>
@@ -47,11 +53,11 @@ export default {
 <style lang='less'>
 #app{
   min-width: 1200px;
-  padding-bottom: 100px;
+  height: 100%;
   .component_con{
     width: 100%;
-    height: 100%;
-    padding-left: 16%;
+    // height: 100%;
+    padding-bottom: 100px;
   }
 }
 

@@ -7,11 +7,9 @@ import store from './store'
 import echarts from 'echarts'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import BootstrapVue from 'bootstrap-vue';
+
 let Base64 = require('js-base64').Base64;
-import BootstrapVue from 'bootstrap-vue'
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap/dist/js/bootstrap.js'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import {
   ajax, fmoney
@@ -35,6 +33,7 @@ import mInput from '@/common/components/input'
 import imageViewer from '@/common/components/imageViewer'
 import vuePreview from 'vue-preview'
 import Page from "@/common/components/page"
+import skPage from "@/common/components/sk-page"
 import navList from './router/navList';
 import Search from "@/common/components/search";
 import dspButton from "@/common/components/dspButton"
@@ -50,6 +49,7 @@ Vue.component('mTree', mTree)
 Vue.component('mPacket', mPacket)
 Vue.component('mInput', mInput)
 Vue.component('page', Page)
+Vue.component('skPage', skPage)
 Vue.component('search', Search)
 Vue.component('dspButton', dspButton)
 Vue.component('selectData', selectData)
@@ -85,17 +85,23 @@ Vue.config.productionTip = false
 getCode()
 function getCode() {
   let random = Math.floor(Math.random() * 2) + 1;
-  switch (3) {
+  switch (2) {
     case 1:
       require('@/common/css/sk1/sk1.css');
       Vue.prototype.SKIN = 1;
       break;
     case 2:
       require('@/common/css/sk2/sk2.css');
+      require ('bootstrap/dist/css/bootstrap.css')
+      require ('bootstrap/dist/js/bootstrap.js')
+      // require ('bootstrap-vue/dist/bootstrap-vue.css')
       Vue.prototype.SKIN = 2;
       break;
     case 3:
       require('@/common/css/sk3/sk3.css');
+      require ('bootstrap/dist/css/bootstrap.css')
+      require ('bootstrap/dist/js/bootstrap.js')
+      require ('bootstrap-vue/dist/bootstrap-vue.css')
       Vue.prototype.SKIN = 3;
       break;
   

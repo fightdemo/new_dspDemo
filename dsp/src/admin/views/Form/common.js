@@ -1,4 +1,4 @@
-import { floatScroll } from "@/common/js/utils";
+import { floatScroll, exportCsv } from "@/common/js/utils";
 var mixin = {
     data() {
         return {
@@ -19,6 +19,28 @@ var mixin = {
         }
     },
     methods: {
+        download() {
+            this.$ajax({
+                url: "/dsp/rpt/all/saasdsp",
+                data: {
+                    page: "1",
+                    size: "9999",
+                    filter: this.filter,
+                    sort: ["cTime,1"]
+                },
+                load: true
+            }).then(res => {
+                console.log( res )
+                var reportList = res.data.data;
+                exportCsv({
+                    title: this.title,
+                    titleForKey: this.titleForKey,
+                    data: reportList
+                    },
+                    this.reprotName+".csv"
+                );
+            });
+        },
         //表格
         init() {
             $('.table-box').css('marginLeft', '0px');

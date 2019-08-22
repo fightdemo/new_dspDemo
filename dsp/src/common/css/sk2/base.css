@@ -676,7 +676,7 @@ body {
   min-height: 100%;
 }
 body {
-  background-color: #2a323c;
+  background-color: #2a323c!important;
   font-size: 12px;
   color: #fff;
   font-family: 'Microsoft YaHei';
@@ -713,7 +713,7 @@ a:hover,
 a:visited,
 a:link,
 a:active {
-  text-decoration: none;
+  text-decoration: none!important;
 }
 textarea {
   resize: none;
@@ -759,6 +759,9 @@ textarea {
   font-size: 32px;
   color: #ffffff;
   margin-bottom: 30px;
+}
+.page .page-title .dropdownDate{
+  float: right;
 }
 .page .page-title .dropdown {
   margin-left: 20px;

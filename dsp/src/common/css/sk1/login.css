@@ -1,12 +1,35 @@
-body,
-html {
+html,
+#app {
   width: 100%;
   height: 100%;
+  margin: 0;
+  padding: 0 !important;
 }
 body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+#app {
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: cover;
+}
+#app #ldoginForm input::-webkit-input-placeholder {
+  color: #fff;
+}
+#app #ldoginForm input::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #fff;
+}
+#app #ldoginForm input:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #fff;
+}
+#app #ldoginForm input:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #fff;
 }
 .form-box {
   width: 300px;
@@ -69,6 +92,8 @@ body {
   font-size: 16px;
   background-color: #4ca6ff;
   border-color: #4ca6ff;
+  color: #fff;
+  border: 0;
 }
 .btn-login:hover {
   background-color: #4ca6ff;
