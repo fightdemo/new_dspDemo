@@ -32,6 +32,10 @@ export default {
             yesterday: "",
             lastWeek: "",
             lastTwo: "",
+            datetody: "",
+            dateyesterday: "",
+            datelastWeek: "",
+            datelastTwo: "",
         }
     },
     mounted() {
@@ -44,19 +48,19 @@ export default {
             var date = new Date();
             var lastWeek = new Date(date.getTime() - 6 * 24 * 3600 * 1000);
             var lastTwo = new Date(date.getTime() - 13 * 24 * 3600 * 1000);
-            var tody = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+            var datetody = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
             lastWeek = lastWeek.getFullYear() + "-" + (lastWeek.getMonth() + 1) + "-" + lastWeek.getDate();
             lastTwo = lastTwo.getFullYear() + "-" + (lastTwo.getMonth() + 1) + "-" + lastTwo.getDate();
-            var yesterday = nextDayFnc(getNowFormatDate(), 1, 1);
+            this.dateyesterday= nextDayFnc(getNowFormatDate(), 1, 1);
             // 借用nextDayFnc方法将XXXX-X-X转化成XXXX-0X-0X格式
-            tody = nextDayFnc(tody,0,1);
-            lastWeek = nextDayFnc(lastWeek,0,1);
-            lastTwo = nextDayFnc(lastTwo,0,1);
-            this.tody = "今日："+parseDate(tody);
+            this.datetody = nextDayFnc(datetody,0,1);
+            this.datelastWeek = nextDayFnc(lastWeek,0,1);
+            this.datelastTwo = nextDayFnc(lastTwo,0,1);
+            this.tody = "今日："+parseDate(this.datetody);
             this.now = this.hasAll?"全部时间段":this.tody;
-            this.yesterday = "昨日：" + parseDate(yesterday);
-            this.lastWeek = "最近7日：" + parseDate(lastWeek) + " — " + parseDate(tody);
-            this.lastTwo = "最近14日：" + parseDate(lastTwo) + " — " + parseDate(tody);
+            this.yesterday = "昨日：" + parseDate(this.dateyesterday);
+            this.lastWeek = "最近7日：" + parseDate(this.datelastWeek) + " — " + parseDate(this.datetody);
+            this.lastTwo = "最近14日：" + parseDate(this.datelastTwo) + " — " + parseDate(this.datetody);
 
             //隐藏时间控件
             $(document).click(function (event) {
@@ -80,7 +84,7 @@ export default {
         },
         // 根据type判断选择的日期
         selectDate($event,type) {
-            var start,end = this.tody;
+            var start,end = this.datetody;
             switch (type) {
                 case 0:
                     this.now = "全部时间段";
@@ -89,22 +93,22 @@ export default {
                 case 1:
                     // 今日
                     this.now = this.tody;
-                    start = this.tody;
+                    start = this.datetody;
                     break;
                 case 2:
                     // 昨日
                     this.now = this.yesterday;
-                    start = end = this.yesterday;
+                    start = end = this.dateyesterday;
                     break;
                 case 3:
                     // 上周
                     this.now = this.lastWeek;
-                    start = this.lastWeek;
+                    start = this.datelastWeek;
                     break;
                 case 4:
                     // 上两周
                     this.now = this.lastTwo;
-                    start = this.lastTwo;
+                    start = this.datelastTwo;
                     break;
                 case 5:
                     // 自定义日期

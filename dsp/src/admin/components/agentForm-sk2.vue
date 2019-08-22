@@ -9,7 +9,7 @@
         <div class="table-box">
             <div class="table-title">
                 <h3 class="table-title-font">代理商报表</h3>
-                <div class="table-download" @click="download()">下载报表</div>
+                <div class="table-download" @click="download()"></div>
             </div>
             <table>
                 <thead>
@@ -106,7 +106,6 @@ export default {
     },
     methods: {
         chooseDate(start, end) {
-            console.log(start)
             if(start) {
                 this.sTime = start + " 00:00:00";
                 this.eTime = end + " 23:59:59";
