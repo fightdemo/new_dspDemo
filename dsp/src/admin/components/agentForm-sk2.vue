@@ -53,7 +53,6 @@
 </template>
 <script>
 import adminDate from "@/common/components/select-data";
-import dropdownDate from "@/common/components/Dropdown-Date";
 import adminSearch from "@/common/components/search";
 import { floatScroll, getNowFormatDate } from "@/common/js/utils";
 import {mixin} from '../views/Form/common.js'
@@ -105,10 +104,10 @@ export default {
         this.getList();
     },
     methods: {
-        chooseDate(start, end) {
-            if(start) {
-                this.sTime = start + " 00:00:00";
-                this.eTime = end + " 23:59:59";
+        chooseDate(val) {
+            if(val.start) {
+                this.sTime = val.start + " 00:00:00";
+                this.eTime = val.end + " 23:59:59";
             } else {
                 this.sTime = this.eTime = undefined;
             }
@@ -152,7 +151,6 @@ export default {
     components: {
         adminDate: adminDate,
         adminSearch: adminSearch,
-        dropdownDate
     }
 };
 </script>

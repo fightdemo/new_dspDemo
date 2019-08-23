@@ -38,6 +38,8 @@ import navList from './router/navList';
 import Search from "@/common/components/search";
 import dspButton from "@/common/components/dspButton"
 import selectData from "@/common/components/select-data";
+import dropdown from "@/common/components/Dropdown";
+import dropdownDate from "@/common/components/Dropdown-Date";
 
 Vue.component('hoursSelect', hoursSelect)
 Vue.component('mCheck', mCheck)
@@ -53,6 +55,8 @@ Vue.component('skPage', skPage)
 Vue.component('search', Search)
 Vue.component('dspButton', dspButton)
 Vue.component('selectData', selectData)
+Vue.component('dropdownDate', dropdownDate)
+Vue.component('dropdown', dropdown)
 
 Vue.prototype.$ajax = ajax
 Vue.prototype.fmoney = fmoney

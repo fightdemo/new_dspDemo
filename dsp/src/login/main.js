@@ -23,7 +23,7 @@ Vue.prototype.$ajax = ajax
 getCode()
 function getCode() {
   let random = Math.floor(Math.random() * 3) + 1;
-  switch (random) {
+  switch (2) {
     case 1:
       require('@/common/css/sk1/sk1.css');
       Vue.prototype.SKIN = 1;

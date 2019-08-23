@@ -125,7 +125,7 @@ export default {
                     $this.removeClass("open");
                     break;
             }
-            this.$emit( 'chooseDate', start )
+            this.$emit( 'chooseDate', {start,end,type} )
         },
         calendar(e) {
             new Calendar().show(e.target);
