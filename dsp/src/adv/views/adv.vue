@@ -1,17 +1,20 @@
 <template>
     <div class="adv-content">
-        <Nav :canLogout="!!permission.act[100]" :navList="navList" :navToolList="navToolList" :balance="balance" :userInfo="userInfo"></Nav>
+        <Nav v-if="SKIN == 1" :canLogout="!!permission.act[100]" :navList="navList" :navToolList="navToolList" :balance="balance" :userInfo="userInfo"></Nav>
+        <NavSk v-if="SKIN == 2" :canLogout="!!permission.act[100]" :navList="navList" :navToolList="navToolList" :balance="balance" :userInfo="userInfo"></NavSk>
         <router-view></router-view>
     </div>
 </template>
 
 <script>
 import Nav from "@/common/components/Nav";
+import NavSk from "@/common/components/Nav-sk";
 import navList from "adv@/router/navList";
 
 export default {
     components: {
-        Nav
+        Nav,
+        NavSk
     },
     computed: {
         balance() {

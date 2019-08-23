@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-import '@/common/css/base.css';
+// import '@/common/css/base.css';
 import router from './router'
 import store from './store'
 import {
@@ -83,6 +83,35 @@ router.beforeEach((to, from, next) => {
     next();
   }
 })
+
+getCode()
+function getCode() {
+  let random = Math.floor(Math.random() * 2) + 1;
+  switch (1) {
+    case 1:
+      require('@/common/css/sk1/sk1.css');
+      require ('@/common/css/base.css');
+      Vue.prototype.SKIN = 1;
+      break;
+    case 2:
+      require('@/common/css/sk2/sk2.css');
+      require ('bootstrap/dist/css/bootstrap.css')
+      require ('bootstrap/dist/js/bootstrap.js')
+      // require ('bootstrap-vue/dist/bootstrap-vue.css')
+      Vue.prototype.SKIN = 2;
+      break;
+    case 3:
+      require('@/common/css/sk3/sk3.css');
+      require ('bootstrap/dist/css/bootstrap.css')
+      require ('bootstrap/dist/js/bootstrap.js')
+      require ('bootstrap-vue/dist/bootstrap-vue.css')
+      Vue.prototype.SKIN = 3;
+      break;
+  
+    default:
+      break;
+  }
+}
 
 var parm = location.href.match(/adv.html#\/(\d+)\/(\d+)\//)
 var token = localStorage["advToken" + parm[2]];

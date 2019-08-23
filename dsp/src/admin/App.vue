@@ -32,7 +32,7 @@ export default {
     }
     if( this.SKIN == '2' && this.judgePlatform() ){
       document.getElementsByClassName('component_con')[0].style.paddingLeft = 0 + 'px';
-      document.getElementsByClassName('component_con')[0].style.marginTop = 175 + 'px';
+      document.getElementsByClassName('component_con')[0].style.marginTop = 100 + 'px';
     }
   },
   methods:{

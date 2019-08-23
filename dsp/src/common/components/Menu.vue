@@ -23,11 +23,14 @@
   </div>
   <div class="mobile-nav-top" v-else>
     <div class="logo" v-if="SKIN == 2" :style="{'background-image':'url('+staticLogo+')'}"></div>
+    <div class="menu-box" @click="toogleMenu">
+        <img class="menu" src="../img/sk2-images/menu.png" alt="">
+    </div>
     <div class="logo-box" v-if="SKIN == 3">
         <div class="logo" :style="{'background-image':'url('+staticLogo+')'}"></div>
     </div>
-    <ul class="nav-list">
-        <li v-for="item in navList"  :key="item.name" :class="{'active': item.flag}" @click.stop="toItem(item)">
+    <ul class="nav-list" v-if="toggleFlag">
+        <li v-for="item in navList"  :key="item.name" :class="{'active': item.flag}" @click.stop="toItem(item,'mobile')">
             <router-link :to="item.to.name">
                 {{item.name}}
                 <i v-if="item.sub && !item.hideSub"  class="icon-nav"></i>
@@ -35,7 +38,7 @@
 
             <ul v-if="item.sub && !item.hideSub" class="nav-dropdown" :class="{'open':item.open}" @click.stop>
                 <li v-for="sub in item.sub" :key="sub.name">
-                    <router-link :to="sub.to">
+                    <router-link :to="sub.to"  @click.native="toogleClose()">
                         {{sub.name}}
                     </router-link>
                 </li>               
@@ -47,6 +50,11 @@
 
 <script>
 export default {
+    data() {
+        return {
+            toggleFlag: false,
+        }
+    },
     props: {
         navList: Array
     },
@@ -64,6 +72,9 @@ export default {
         },
     },
     methods: {
+        toogleMenu() {
+            this.toggleFlag = !this.toggleFlag
+        },
         IsPC() {
             var userAgentInfo = navigator.userAgent;
             var Agents = ["Android", "iPhone",
@@ -94,7 +105,7 @@ export default {
                 }
             }
         },
-        toItem(item) {
+        toItem(item,type) {
             if(item.sub) {
                 this.$set(item,"open", true)
                 this.$router.push({
@@ -104,7 +115,13 @@ export default {
                 this.$router.push({
                     name: item.to.name
                 })
+                if( type == 'mobile' ){
+                    this.toggleFlag = false;    
+                } 
             }                
+        },
+        toogleClose() {
+            this.toggleFlag = false;
         },
         toggle(item) {
             this.$set(item,"open",!item.open)    

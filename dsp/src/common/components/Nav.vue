@@ -174,7 +174,7 @@ export default {
     },
     methods: {
         toggleMenu() {
-            this.toggleFlag = true;
+            this.toggleFlag = !this.toggleFlag;
         },
         IsPC() {
             var userAgentInfo = navigator.userAgent;
