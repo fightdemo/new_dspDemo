@@ -1,7 +1,8 @@
 <template>
     <div class="adv-content">
         <Nav v-if="SKIN == 1" :canLogout="!!permission.act[100]" :navList="navList" :navToolList="navToolList" :balance="balance" :userInfo="userInfo"></Nav>
-        <NavSk v-if="SKIN == 2" :canLogout="!!permission.act[100]" :navList="navList" :navToolList="navToolList" :balance="balance" :userInfo="userInfo"></NavSk>
+        <!-- <NavSk v-if="SKIN == 2" :canLogout="!!permission.act[100]" :navList="navList" :navToolList="navToolList" :balance="balance" :userInfo="userInfo"></NavSk> -->
+        <Menu :navList='navList'  v-if="SKIN == 2"></Menu>
         <router-view></router-view>
     </div>
 </template>
@@ -9,12 +10,14 @@
 <script>
 import Nav from "@/common/components/Nav";
 import NavSk from "@/common/components/Nav-sk";
+import Menu from "@/common/components/Menu";
 import navList from "adv@/router/navList";
 
 export default {
     components: {
         Nav,
-        NavSk
+        NavSk,
+        Menu,
     },
     computed: {
         balance() {
@@ -106,5 +109,8 @@ export default {
 <style>
 .adv-content{
     margin: 0;
+    width: 100%;
+    padding-left: 16%;
+    padding-bottom: 100px;
 }
 </style>

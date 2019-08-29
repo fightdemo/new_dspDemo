@@ -1,5 +1,5 @@
 <template>
-    <div class="cl" style="width:100%;height: 100%">
+    <div class="cl login" style="width:100%;height: 100%">
         <div class="login-left" :style="{'background':'url('+oem.background+') no-repeat center center / cover'}">
             
         </div>

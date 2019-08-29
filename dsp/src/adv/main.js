@@ -30,6 +30,10 @@ import Search from "@/common/components/search"
 import dspTab from "@/common/components/dspTab"
 import dspButton from "@/common/components/dspButton"
 import Caret from "@/common/components/caret"
+import dropdown from "@/common/components/Dropdown";
+import dropdownDate from "@/common/components/Dropdown-Date";
+import checksk from "@/common/components/check-sk";
+import radiosk from "@/common/components/radio-sk";
 
 Vue.component('mSelect', mSelect)
 Vue.component('mSwitch', Switch)
@@ -43,6 +47,10 @@ Vue.component('search', Search)
 Vue.component('dspTab', dspTab)
 Vue.component('dspButton', dspButton)
 Vue.component('Caret',Caret)
+Vue.component('dropdownDate', dropdownDate)
+Vue.component('dropdown', dropdown)
+Vue.component('check-sk', checksk)
+Vue.component('radio-sk', radiosk)
 
 Vue.use(imageViewer)
 Vue.use(vuePreview,{
@@ -87,7 +95,7 @@ router.beforeEach((to, from, next) => {
 getCode()
 function getCode() {
   let random = Math.floor(Math.random() * 2) + 1;
-  switch (1) {
+  switch (2) {
     case 1:
       require('@/common/css/sk1/sk1.css');
       require ('@/common/css/base.css');
@@ -104,7 +112,6 @@ function getCode() {
       require('@/common/css/sk3/sk3.css');
       require ('bootstrap/dist/css/bootstrap.css')
       require ('bootstrap/dist/js/bootstrap.js')
-      require ('bootstrap-vue/dist/bootstrap-vue.css')
       Vue.prototype.SKIN = 3;
       break;
   

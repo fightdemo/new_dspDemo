@@ -8,7 +8,14 @@ body {
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
-.form-box {
+.login {
+  /* padding: 10px 0; */
+  /* min-height: 30px; */
+  /* line-height: 30px; */
+  /* position: relative; */
+  /* padding-left: 120px; */
+}
+.login .form-box {
   width: 300px;
   height: 360px;
   position: absolute;
@@ -17,25 +24,20 @@ body {
   top: 50%;
   margin-top: -220px;
 }
-.logo-box {
+.login .logo-box {
   width: 100%;
   text-align: center;
   margin-bottom: 60px;
 }
-/* padding: 10px 0; */
-/* min-height: 30px; */
-/* line-height: 30px; */
-/* position: relative; */
-/* padding-left: 120px; */
-.form-group {
+.login .form-group {
   margin-bottom: 25px;
   padding-left: 0;
   min-height: auto;
 }
-.form-group label {
+.login .form-group label {
   color: #fff;
 }
-.form-box .form-group input {
+.login .form-box .form-group input {
   padding-left: 35px;
   height: 40px;
   width: 100%;
