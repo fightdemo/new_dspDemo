@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="sk1-login">
         <div class="form-box">
             <div class="form-group logo-box">
                 <img width="100%" height="100%" :src="oem.loginLogo">

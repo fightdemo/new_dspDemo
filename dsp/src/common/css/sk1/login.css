@@ -31,7 +31,14 @@ body {
   /* Internet Explorer 10-11 */
   color: #fff;
 }
-.form-box {
+.sk1-login {
+  /* padding: 10px 0; */
+  /* min-height: 30px; */
+  /* line-height: 30px; */
+  /* position: relative; */
+  /* padding-left: 120px; */
+}
+.sk1-login .form-box {
   width: 300px;
   height: 360px;
   position: absolute;
@@ -40,25 +47,20 @@ body {
   top: 50%;
   margin-top: -190px;
 }
-.logo-box {
+.sk1-login .logo-box {
   width: 100%;
   text-align: center;
   margin-bottom: 60px;
 }
-/* padding: 10px 0; */
-/* min-height: 30px; */
-/* line-height: 30px; */
-/* position: relative; */
-/* padding-left: 120px; */
-.form-group {
+.sk1-login .form-group {
   margin-bottom: 25px;
   padding-left: 0;
   min-height: auto;
 }
-.form-group label {
+.sk1-login .form-group label {
   color: #fff;
 }
-.form-box .form-group input {
+.sk1-login .form-box .form-group input {
   padding-left: 35px;
   height: 40px;
   width: 100%;
@@ -68,13 +70,13 @@ body {
   background-position: 6px center;
   color: #fff;
 }
-.form-group .form-control.user-input {
+.sk1-login .form-group .form-control.user-input {
   background-image: url("../../img/sk1-images/user.png");
 }
-.form-group .form-control.pwd-input {
+.sk1-login .form-group .form-control.pwd-input {
   background-image: url("../../img/sk1-images/pwd.png");
 }
-.form-group .form-control.vercode-input {
+.sk1-login .form-group .form-control.vercode-input {
   background-image: url("../../img/sk1-images/code.png");
   display: inline-block;
   width: 54% ;

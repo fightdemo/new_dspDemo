@@ -69,6 +69,11 @@ export default {
             ]
         };
     },
+    mounted() {
+        if( this.SKIN == '1' ){
+            document.getElementsByClassName('adv-content')[0].style.paddingLeft = 0 + 'px'
+        }
+    },
     methods: {
         getDepot() {
             this.$ajax({

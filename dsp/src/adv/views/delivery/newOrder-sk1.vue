@@ -1,4 +1,3 @@
-
 <template>
     <div class="new-order">
         <p class="page-title">{{edit ? '编辑订单': '添加订单'}}</p>
@@ -1236,7 +1235,7 @@ export default {
                     "ip": '',
                     "interestID": "",//兴趣标签id,
                     "lbsPosition": [],//地理位置LBS
-                    "mediaType": "0", //流量来源 默认全网优化效果类为13正企类为0
+                    "mediaType": "0", //流量来源 默认全网优化 效果类为13正企类为0
                 },
                 "profit": "",
                 "bidPrice": "",
@@ -1973,6 +1972,9 @@ export default {
                         this.flowSource = "3"
                     }else if(flowSource == "12") {
                         this.flowSource = "4"
+                    }else if ( flowSource == '13' ){
+                        this.dadta.direct.sourceIn = '0'
+                        this.data.direct.spaceIDIn = ""
                     }
                     if(this.data.direct.spaceIDIn || this.data.direct.spaceIDOut) {
                         this.custom = "2"
@@ -2844,7 +2846,7 @@ export default {
             //流量来源
             if(this.flowSource != "1") {
                 this.data.direct.sourceIn = "";
-                if(this.directInfo.spaceID == "" && this.custom == "2") {
+                if(this.directInfo.spaceID == "" && this.custom == "2" && this.data.direct.mediaType != '13') {
                     error = "请选择媒体！"
                     return error;
                 }

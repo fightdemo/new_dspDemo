@@ -288,14 +288,237 @@
                     </div>
                 </div>
             </div>
+            <!-- 合约第三步 -->
+            <div class="page-three" v-show="step==3">
+              <button class="dsp-btn btn-upload" @click="uploadBoxShow();">上传素材</button>
+              <div class="main bs" style="border-radius: 5px;border-left: 0px;border-right: 0px;">
+                    <div class="title">素材列表</div>
+                    <table class="table material-list">
+                        <thead>
+                        <tr>
+                            <td style="padding-left: 22px;">素材</td>
+                            <td>素材内容</td>
+                            <td>素材类型</td>
+                            <td>审核状态</td>
+                            <!--<td>广告位尺寸</td>-->
+                            <td>操作</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(mItem, index) in materialList" :key="index">
+                                <td>
+                                    ID： {{mItem.id}}
+                                </td>
+                                <td class="td-creative-content">
+                                    创意名称：{{mItem.name}}<br><br>
+                                    创意ID： {{mItem.id}}<br><br>
+                                    广告位类型：{{adTypes[mItem.adType]}}<br><br>
+                                    交互方式：{{interactionTypes[mItem.interactionType]}}<br><br>
+                                </td>
+                                <td>
+                                    <div v-for="i in mItem.material">
+                                        <div v-if="i.image">
+                                            <span>图片：</span>
+                                            <a href="javascript:;" @click="showImg(i.image.url)">查看图片</a><br><br>
+                                        </div>
+                                        <div v-if="i.video">
+                                            <span>视频：</span>
+                                            <a href="javascript:;" @click="showVideo(i.video.url)">查看视频</a><br><br>
+                                        </div>
+                                        <div v-if="i.text">
+                                            <span>文本：</span>
+                                            <span>{{i.text.content}}</span><br><br>
+                                        </div>
+                                        <div v-if="i.data">
+                                            <span>{{dataType[i.data.type * 1]}}：</span>
+                                            <span>{{i.data.content}}</span><br><br>
+                                        </div>
+                                        <div v-if="$first">
+                                            点击监测：<button class="dsp-btn btn-gray" @click="checkUrl(mItem.clickUrls.join(','))">查看</button><br><br>
+                                            曝光监测：<button class="dsp-btn btn-gray" @click="checkUrl(mItem.viewUrls.join(','))">查看</button><br><br>
+                                            落地页：<button class="dsp-btn btn-gray" @click="openUrl(mItem.landingUrl)">查看</button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        内部审核：
+                                            {{mItem.auditState=="1"?"待审核":mItem.auditState=="2"?"审核通过":"审核拒绝"}}
+                                    </div>
+                                    <div style="padding-left: 65px;" class="form-group">
+                                        <label style="width: 61px;">平台审核：</label>
+                                        {{mItem.adxAuditList.approved.length}}个平台通过审核
+                                        
+                                        <br>
+                                        {{mItem.adxAuditList.reject.length}}个平台审核拒绝
+                                        
+                                        <br>
+                                        {{mItem.adxAuditList.pending.length}}个平台待审核
+                                    </div>
+                                </td>
+                                <td>
+                                    <button :disabled="mItem.auditState=='2'" class="dsp-btn btn-blue" :class="{'btn-not': mItem.auditState=='2'}" @click="creativeEdit(mItem, $index)">编辑</button>
+                                    <button class="dsp-btn btn-red" @click="delCreative(mItem.id, $index)">停用</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+            <!-- 第四步 -->
+            <div class="main page-four" v-show="step==4">
+              <div class="form-box">
+                <div class="form-group">
+                    <label>交易类型：</label>
+                    <span>{{orderType=="bid"?"竞价交易":"合约交易"}}</span>
+                </div>
+                <div class="form-group">
+                    <label>活动名称：</label>
+                    <span ng-bind="dataView.activeName"></span>
+                </div>
+                <div class="form-group">
+                    <label>订单名称：</label>
+                    <span ng-bind="data.name"></span>
+                </div>
+                <div class="form-group">
+                    <label>创意形式：</label>
+                    <span>
+                        <!-- <span ng-repeat="material in materialList">
+                            <span ng-if="!$last">{{creativeTypes[material.creativeType]}}，</span>
+                            <span ng-if="$last">{{creativeTypes[material.creativeType]}}</span>
+                        </span> -->
+                    </span>
+                    <!--<span ng-bind="dataView.materialType"></span>-->
+                </div>
+                <div class="form-group">
+                    <label>预算控制：</label>
+                    <span ng-bind="dataView.orderBudget"></span>
+                </div>
+                <div class="form-group">
+                    <label>投放速率：</label>
+                    <!-- <span>{{dataView.controlMode}}{{data.speedUp=='0'?"匀速":"加速"}}
+                        {{data.controlMode=="0"?data.limitPrice:data.limitView}}{{data.speedUnit=='day'?"天":"小时"}}</span> -->
+                    <!--<span ng-bind="dataView."></span>-->
+                </div>
+                <div class="form-group">
+                    <label>频次控制：</label>
+                    <!-- <span>{{data.frequencyLimit != "" ? (data.frequencyLimit + "次/" + dataView.frequencyUnit) : "不限"}}</span> -->
+                    <!--<span ng-bind="dataView."></span>-->
+                </div>
+                <div class="form-group">
+                    <label>投放时间：</label>
+                    <span ng-bind="dataView.time"></span>
+                    <!--<span ng-bind="dataView."></span>-->
+                </div>
+                <div ng-if="orderType=='bid'">
+                  <div class="order-row">
+                      定向信息
+                  </div>
+                  <div class="form-group">
+                      <label>性别定向：</label>
+                      <span ng-bind="dataView.sex"></span>
+                  </div>
+                  <div class="form-group">
+                      <label>收入定向：</label>
+                      <span ng-bind="dataView.income"></span>
+                  </div>
+                  <div class="form-group">
+                      <label>年龄定向：</label>
+                      <span ng-bind="dataView.age"></span>
+                  </div>
+                  <div class="form-group flowSource cl" style="display: block;">
+                      <label>流量来源：</label>
+                      <span ng-if="position.publish=='all'">
+                          <!-- {{publishConfig.selectNameArr.join("，")}} -->
+                      </span>
+
+                      <span ng-if="position.publish=='select'">
+                          <!-- {{mediaConfig.selectNameArr.join("，")}} -->
+                      </span>
+
+                      <span ng-if="position.publish=='new'">
+                          <!-- {{newMediaConfig.selectNameArr.join("，")}} -->
+                      </span>
+
+                      <span ng-if="position.publish=='space'">
+                          <!-- {{position.spaceNames.join("，")}} -->
+                      </span>
+
+                      <!-- <li class="pkg-crowd cl" ng-if="position.publish=='crowd'" ng-class="{'pkg-checked': config.crowd == pkgView.id + ''}">
+                          <div class="radio-box">
+                          </div>
+                          <div class="name-box">
+                              <img ng-src="{{pkgView.icon}}" /><br>
+                              <span ng-bind="pkgView.name"></span>
+                          </div>
+                          <div class="remark-box" ng-class="{'line-hei': pkgView.description.length > 22}">
+                              <span ng-bind="pkgView.description"></span>
+                          </div>
+                      </li> -->
+
+                      <!-- <li ng-if="position.publish=='industry'" class="cl pkg-industry">
+                          <div class="radio-box">
+                          </div>
+                          <div ng-class="{'pkg-checked': config.industry == pkgView.id + ''}" class="app-list cl">
+                              <div class="name-box">
+                                  <span ng-bind="pkgView.name"></span>
+                              </div>
+                              <div class="app-box cl">
+                                  <ul class="cl" ng-style="{width:pkgView.appInfo.length * 126 + 20+'px'}">
+                                      <li ng-repeat="s in pkgView.appInfo">
+                                          <div class="img-box">
+                                              <img ng-src="{{s.appIcon}}" />
+                                          </div>
+                                          <div class="app-name-box" ng-bind="s.appName">
+                                          </div>
+                                      </li>
+                                  </ul>
+                              </div>
+                          </div>
+                      </li> -->
+                  </div>
+                  <div class="form-group">
+                      <label>操作系统：</label>
+                      <span ng-bind="data.platform"></span>
+                  </div>
+                  <div class="order-row">素材信息</div>
+                  <div class="form-group">
+                      <label>创意信息：</label>
+                      <span>
+                          <span ng-repeat="material in materialList">
+                              <!-- 素材名称：{{material.name}}，目标地址：{{material.landingUrl}}<br> -->
+                          </span>
+                      </span>
+                  </div>
+                  <div>
+                    <div class="order-row">广告单元控制</div>
+                    <div class="form-group" ng-if="accountType != '0' && isDirect != '1'">
+                        <label>利润设置：</label>
+                        <radio module="profit" value="false" callback="switchProfit">否</radio>
+                        <radio module="profit" value="true" callback="switchProfit">是</radio>
+                        <input type="text" ng-model="data.profit" class="form-control" ng-disabled="profit=='false'"/>&nbsp;%
+                    </div>
+
+                    <div class="form-group" ng-if="data.type == 'rtb'">
+                        <label><span class="icon-must">*</span>订单出价：</label>
+                        <!-- <radio disabled="orderId!=''" module="data.chargeMode" value="cpm">CPM</radio>
+                        <span ng-if="hasCPC == 1">
+                            <radio disabled="orderId!=''" module="data.chargeMode" value="cpc">CPC</radio>
+                        </span> -->
+                        <input class="form-control" ng-model="data.bidPrice" type="text"/>&nbsp;元
+                    </div>
+                </div>
+                </div>
+              </div>
+            </div>
+        </div>
         <div class="footer">
             <div class="fl">
                 <button style="width: 80px;" class="dsp-btn btn-gray" v-show="step!=1" @click="previous()">上一步</button>
             </div>
             <div class="fr">
                 <button style="width: 140px;" class="dsp-btn btn-blue" @click="next()">{{nextText}}</button>
-                <button style="width: 80px;" class="dsp-btn btn-gray" ng-click="cancel()" ng-show="step==1">取消</button>
+                <button style="width: 80px;" class="dsp-btn btn-gray" ng-click="cancel()" v-show="step==1">取消</button>
             </div>
         </div>
 
@@ -336,6 +559,9 @@ export default {
                 this.step = step;
             } else if (this.step != 4){
                 this.step++;
+            }
+            if( this.step == 4 ){
+              this.nextText = "完成"
             }
         },
         // 上一步
