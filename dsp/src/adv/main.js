@@ -132,6 +132,14 @@ store.dispatch("getBalance")
 store.dispatch("getUserInfo").then(res => {
   // 获取权限后再渲染dom
   store.dispatch("getPermission").then(res => {
+    // 皮肤2左侧菜单 系统管理和财务管理下显示子集，且点击进入到以一个子集
+    if(Vue.prototype.SKIN == 2) {
+      navList.forEach(item => {
+        if(item.name == '系统管理' || item.name == '财务管理') {
+          item.hideSub = false;
+        }
+      })
+    }
     Vue.prototype.permission = store.state.common.permission;
     // 根据账户类型来控制报表展示
     var View = judgeAccountType(store.state.common.permission.view)
@@ -141,11 +149,7 @@ store.dispatch("getUserInfo").then(res => {
     getPage(navList,'adv')
     console.log(page);
     
-    // Vue.directive( 'title', {
-    //   inserted: function (el, binding) { 
-    //     document.title = el.dataset.title
-    //    }
-    // } )
+    
 
     new Vue({
       el: '#app',

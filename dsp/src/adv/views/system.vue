@@ -1,18 +1,16 @@
 <template>
     <div>
-        <dsp-tab :tabList="tabList" class="content"></dsp-tab>
-        <router-view />
+        <systemSk1 v-if="SKIN == 1"></systemSk1>
+        <systemSk2 v-if="SKIN == 2"></systemSk2>
     </div>
 </template>
 <script>
+import systemSk1 from "adv@/components/system/system-sk1"
+import systemSk2 from "adv@/components/system/system-sk2"
 export default {
-    data() {
-        return {
-            tabList: [
-                {name:'基本信息',to:{name:'system.base'}},
-                {name:'资质信息',to:{name:'system.qualification'}},
-            ]
-        }
+    components: {
+        systemSk1,
+        systemSk2,
     }
 }
 </script>

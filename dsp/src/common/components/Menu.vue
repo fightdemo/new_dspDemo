@@ -6,11 +6,14 @@
         </div>
         <ul class="nav-list">
             <li v-for="item in navList"  :key="item.name" :class="{'active': item.flag}" @click.stop="toItem(item)">
-                <router-link :to="item.to.name">
+                <!-- <router-link :to="item.to.name">
                     {{item.name}}
                     <i v-if="item.sub && !item.hideSub"  class="icon-nav"></i>
-                </router-link>
-
+                </router-link> -->
+                <a href="javascript:;">
+                    {{item.name}}
+                    <i v-if="item.sub && !item.hideSub" @click.stop="toggle(item)" class="icon-nav"></i>
+                </a>
                 <ul v-if="item.sub && !item.hideSub" class="nav-dropdown" :class="{'open':item.open}" @click.stop>
                     <li v-for="sub in item.sub" :key="sub.name">
                         <router-link :to="sub.to">
