@@ -89,7 +89,7 @@ Vue.config.productionTip = false
 getCode()
 function getCode() {
   let random = Math.floor(Math.random() * 2) + 1;
-  switch (2) {
+  switch (1) {
     case 1:
       require('@/common/css/sk1/sk1.css');
       Vue.prototype.SKIN = 1;

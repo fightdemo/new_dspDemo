@@ -15,7 +15,7 @@ import {
 } from "@/common/js/filter"
 import navList from './router/navList';
 import BaiduMap from 'vue-baidu-map'
-
+// 皮肤1使用的组件
 import imageViewer from '@/common/components/imageViewer'
 import vuePreview from 'vue-preview'
 import mSelect from "@/common/components/select"
@@ -30,6 +30,8 @@ import Search from "@/common/components/search"
 import dspTab from "@/common/components/dspTab"
 import dspButton from "@/common/components/dspButton"
 import Caret from "@/common/components/caret"
+
+// 皮肤2使用的组件
 import dropdown from "@/common/components/Dropdown";
 import dropdownDate from "@/common/components/Dropdown-Date";
 import checksk from "@/common/components/check-sk";
@@ -95,17 +97,16 @@ router.beforeEach((to, from, next) => {
 getCode()
 function getCode() {
   let random = Math.floor(Math.random() * 2) + 1;
-  switch (1) {
+  switch (2) {
     case 1:
       require('@/common/css/sk1/sk1.css');
       require ('@/common/css/base.css');
       Vue.prototype.SKIN = 1;
       break;
     case 2:
-      require('@/common/css/sk2/sk2.css');
       require ('bootstrap/dist/css/bootstrap.css')
       require ('bootstrap/dist/js/bootstrap.js')
-      // require ('bootstrap-vue/dist/bootstrap-vue.css')
+      require('@/common/css/sk2/sk2.css');
       Vue.prototype.SKIN = 2;
       break;
     case 3:

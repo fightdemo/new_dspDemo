@@ -23,5 +23,6 @@ export default {
 <style lang="less">
 #app{
     // min-width: 1100px;
+    padding-left: 16%;
 }
 </style>
