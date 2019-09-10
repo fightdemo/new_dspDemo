@@ -1,6 +1,6 @@
 <template>
     <div class="new-order">
-        <p class="page-title">{{edit ? '编辑订单': '添加订单'}}</p>
+        <p class="page-title">{{edit ? '我可以随意改变-编辑订单': '我可以随意改变-添加订单'}}</p>
         <div class="order-content">
             <div style="background:#FFF;padding:30px;">
                 <!-- 基本信息 -->

@@ -30,10 +30,10 @@ import Search from "@/common/components/search"
 import dspTab from "@/common/components/dspTab"
 import dspButton from "@/common/components/dspButton"
 import Caret from "@/common/components/caret"
-import dropdown from "@/common/components/Dropdown";
-import dropdownDate from "@/common/components/Dropdown-Date";
-import checksk from "@/common/components/check-sk";
-import radiosk from "@/common/components/radio-sk";
+import dropdown from "@/common/old_components/Dropdown";
+import dropdownDate from "@/common/old_components/Dropdown-Date";
+import checksk from "@/common/old_components/check-sk";
+import radiosk from "@/common/old_components/radio-sk";
 
 Vue.component('mSelect', mSelect)
 Vue.component('mSwitch', Switch)
@@ -95,7 +95,7 @@ router.beforeEach((to, from, next) => {
 getCode()
 function getCode() {
   let random = Math.floor(Math.random() * 2) + 1;
-  switch (1) {
+  switch (2) {
     case 1:
       require('@/common/css/sk1/sk1.css');
       require ('@/common/css/base.css');

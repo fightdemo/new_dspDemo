@@ -8,6 +8,9 @@ import echarts from 'echarts'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import BootstrapVue from 'bootstrap-vue';
+import layer from 'vue-layer'
+
+Vue.prototype.$layer = layer(Vue);
 
 let Base64 = require('js-base64').Base64;
 
@@ -33,13 +36,18 @@ import mInput from '@/common/components/input'
 import imageViewer from '@/common/components/imageViewer'
 import vuePreview from 'vue-preview'
 import Page from "@/common/components/page"
-import skPage from "@/common/components/sk-page"
 import navList from './router/navList';
 import Search from "@/common/components/search";
+
+import skPage from "@/common/old_components/sk-page"
+import searchSk from "@/common/old_components/search-sk";
 import dspButton from "@/common/components/dspButton"
 import selectData from "@/common/components/select-data";
-import dropdown from "@/common/components/Dropdown";
-import dropdownDate from "@/common/components/Dropdown-Date";
+import dropdown from "@/common/old_components/Dropdown";
+import dropdownInput from "@/common/old_components/Dropdown-Input";
+import dropdownDate from "@/common/old_components/Dropdown-Date";
+import checksk from "@/common/old_components/check-sk";
+import radiosk from "@/common/old_components/radio-sk";
 
 Vue.component('hoursSelect', hoursSelect)
 Vue.component('mCheck', mCheck)
@@ -53,10 +61,16 @@ Vue.component('mInput', mInput)
 Vue.component('page', Page)
 Vue.component('skPage', skPage)
 Vue.component('search', Search)
+Vue.component('searchSk', searchSk)
+
+
 Vue.component('dspButton', dspButton)
 Vue.component('selectData', selectData)
 Vue.component('dropdownDate', dropdownDate)
 Vue.component('dropdown', dropdown)
+Vue.component('dropdownInput', dropdownInput)
+Vue.component('check-sk', checksk)
+Vue.component('radio-sk', radiosk)
 
 Vue.prototype.$ajax = ajax
 Vue.prototype.fmoney = fmoney

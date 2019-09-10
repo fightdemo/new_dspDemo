@@ -18,6 +18,8 @@ import adminOrderDetail from 'admin@/views/delivery/orderDetail' //投放完成�
 import skuManage from 'admin@/views/sku/manage'
 import skuDetail from 'admin@/views/sku/detail'
 
+import Demo from 'admin@/views/Demo.vue'  //基础组件存放demo
+
 import adminOEM from 'admin@/views/tool/oem'
 import advspaceM from 'admin@/views/tool/advspaceM'
 import exConfig from 'admin@/views/tool/adminDirectEx'
@@ -155,6 +157,10 @@ export default new Router({
           component: skuDetail
         }
       ]
+    },{
+      path: '/demo',
+      name: 'demo',
+      component: Demo,
     }
   ]
 })

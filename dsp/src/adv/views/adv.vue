@@ -9,7 +9,7 @@
 
 <script>
 import Nav from "@/common/components/Nav";
-import NavSk from "@/common/components/Nav-sk";
+import NavSk from "@/common/old_components/Nav-sk";
 import Menu from "@/common/components/Menu";
 import navList from "adv@/router/navList";
 

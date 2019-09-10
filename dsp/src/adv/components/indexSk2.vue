@@ -52,7 +52,7 @@
 import { getNowFormatDate } from "@/common/js/utils";
 import Target from "@/common/components/target"; 
 import Chart from "@/common/components/chart";
-import Dropdown from "@/common/components/Dropdown";
+import Dropdown from "@/common/old_components/Dropdown";
 import ChartBox from "@/common/components/Chart-Box";
 export default {
     data(){

@@ -16,7 +16,7 @@ import navList from "./router/navList";
 import Menu from "@/common/components/Menu";
 import MenuTool from "@/common/components/MenuTool";
 import Nav from "@/common/components/Nav";
-import NavSk from "@/common/components/Nav-sk";
+import NavSk from "@/common/old_components/Nav-sk";
 export default {
   name: 'App',
   data(){

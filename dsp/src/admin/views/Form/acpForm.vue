@@ -1,5 +1,6 @@
 <template>
     <div id="admin_form_agent">
+        <div @click="demo" style="color:red;">点击我</div>
         <p class="page-title">广告公司报表中心</p>
         <div class="table content">
             <div class="table-top">
@@ -124,6 +125,7 @@ export default {
             this.filter.agencyName = val;
             this.getList();
         },
+
         getList() {
             this.$ajax({
                 url: "/dsp/rpt/all/agency",

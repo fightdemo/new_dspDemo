@@ -1,36 +1,28 @@
 <template>
-        
-    <div class="active-page page ng-scope">
-        <!--页面标题-->
-        <h3 class="page-title">首页</h3>
-        <!--总计列表-->
-        <ul class="deal-list">
-            <li>
-                <p>曝光量</p>
-                <h3 class="ng-binding">0</h3>
-            </li>
-            <li>
-                <p>点击量</p>
-                <h3 class="ng-binding">0</h3>
-            </li>
-            <li>
-                <p>点击率</p>
-                <h3 class="ng-binding">0.00%</h3>
-            </li>
-            <li>
-                <p>花费(元)</p>
-                <h3 class="ng-binding">0</h3>
-            </li>
-            <li>
-                <p>CPM(元)</p>
-                <h3 class="ng-binding">0</h3>
-            </li>
-            <li>
-                <p>CPC(元)</p>
-                <h3 class="ng-binding">0</h3>
-            </li>
-        </ul>
-        <!--趋势分析-->
+    <div class="demo-page">
+        <div class="page">
+            <h3 class="page-title">基础组件</h3>
+        </div>
+        1、搜索框<search-sk @search="search"></search-sk>
+        2、下拉框（圆角）<Dropdown :list="chartTargetList" title="曝光量" valueName="name" @change="selectRight"></Dropdown><br/>
+        3、按钮（样式一）<button type="button" class="dsp-btn btn-blue newActive">新建活动</button><br/>
+        4、按钮（样式二）<button type="button" class="dsp-btn btn-white newActive">查看报表</button><br/>
+        5、下拉框可输入<dropdownInput :list="chartTargetList"></dropdownInput>
+        6、时间选择<dropdown-date callback="chooseDate" has-all="true"></dropdown-date>
+        7、输入框<div class="form-group">
+            <input type="text" class="form-control"/>
+        </div>
+        8、分页<skPage id="pageToolbar" :page="pageObj" @change="getList"></skPage>
+        9、单选框和多选框   <radio-sk module="position.income" value="all">不限</radio-sk>
+        <radio-sk module="position.income" value="custom">指定</radio-sk>
+        <div class="form-group" style="padding-left: 66px;" ng-show="position.income=='custom'">
+            <check-sk value="1" module="position.incomes">1000RMB以下</check-sk>
+            <check-sk value="2" module="position.incomes">1001-3000RMB</check-sk>
+            <check-sk value="3" module="position.incomes">3001-5000RMB</check-sk>
+            <check-sk value="4" module="position.incomes">5001-10000RMB</check-sk>
+            <check-sk value="5" module="position.incomes">10000RMB以上</check-sk>
+        </div>
+        10、图表
         <div class="chart-box bs">
             <div class="chart-title">
                 <div class="form-group fr">
@@ -45,58 +37,21 @@
             </div>
             <Chart-Box :data="chartData" :targetList="defalutTarget"></Chart-Box>
         </div>
-    </div>    
-
+        11、查询图片
+        <a href="javascript:;" @click="showPhoto('http://res1.hubcloud.com.cn/dsp/oem/2019/9/9/1568022345990.png')">查看</a>
+    </div>
 </template>
 <script>
 import { getNowFormatDate } from "@/common/js/utils";
-import Target from "@/common/components/target"; 
-import Chart from "@/common/components/chart";
 import Dropdown from "@/common/old_components/Dropdown";
 import ChartBox from "@/common/components/Chart-Box";
+import Target from "@/common/components/target"; 
+import Chart from "@/common/components/chart";
 export default {
-    data(){
+    data() {
         return {
             sTime: getNowFormatDate() + " " + "00:00:00",
             eTime: getNowFormatDate() + " " + "23:59:59",
-            targetData: {},
-            targetList: [
-                {
-                    name: '代理商当日花费',
-                    t: 'dspCost',
-                    yT: 'ytdspCost',
-                    ybT: 'ybtdspCost'
-                   
-                },{
-                    name: '当日成本',
-                    t: 'adminCost',
-                    yT: 'ytadminCost',
-                    ybT: 'ybtadminCost'
-                },{
-                    name: '当日利润',
-                    t: 'adminProfit',
-                    yT: 'ytadminProfit',
-                    ybT: 'ybtadminProfit'
-                    
-                },{
-                    name: '当日利润率',
-                    t: 'adminProfitRate',
-                    isRate: true,
-                    yT: 'ytadminProfitRate',
-                    ybT: 'ybtadminProfitRate'
-                },{
-                    name: 'CPM',
-                    t: 'cpm',
-                    yT: 'ytcpm',
-                    ybT: 'ybtcpm'
-                },{
-                    name: 'CPC',
-                    t: 'cpc',
-                    yT: 'ytcpc',
-                    ybT: 'ybtcpc'
-                }
-            ],
-            chartData:{},
             chartTargetList: [
                 {id:"click",name:"点击量"},
                 {id:"clickRate",name:"点击率"},
@@ -106,6 +61,12 @@ export default {
                 {id:"cpm",name:"cpm"},
                 {id:"cpc",name:"cpc"},
             ],
+            pageObj: {
+                currentPage: 1,
+                size: 20,
+                total: 0
+            },
+            chartData:{},
             defalutTarget: {
                 data1: [],
                 data2: [],
@@ -115,12 +76,40 @@ export default {
             }
         }
     },
-    mounted(){
+    mounted() {
         this.getTarget();
         this.getChartData();
     },
     methods: {
-        //获取汇总数据
+        search(val) {
+            console.log( val )
+        },
+        selectRight(val){
+
+        },
+        getList() {
+
+        },
+        showPhoto(url){
+            if(url) {
+                this.$layer.photos({
+                    photos:{
+                        "title": "", //相册标题
+                        "id": 1, //相册id
+                        "start": 0, //初始显示的图片序号，默认0
+                        "data": [   //相册包含的图片，数组格式
+                            {
+                                "alt": "",
+                                "pid": 2, //图片id
+                                "src": url, //原图地址
+                                "thumb": "" //缩略图地址
+                            }
+                        ]
+                    },
+                    anim: 5
+                })
+            }
+        },
         getTarget(){
             this.$ajax({
                 url: '/dsp/rpt/admin/summary',
@@ -203,13 +192,15 @@ export default {
         }
     },
     components:{
-        'target': Target,
-        'chart': Chart,
         'Dropdown': Dropdown,
         'Chart-Box': ChartBox,
+        'target': Target,
+        'chart': Chart,
     }
-    
 }
 </script>
 <style lang="less">
+.demo-page{
+    color: #fff;
+}
 </style>

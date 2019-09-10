@@ -98,7 +98,10 @@ var mixin = {
                     $floatTh[i].style.width = v.offsetWidth+"px";
                 }
             })                
-        } 
+        } ,
+        demo () {
+            console.log(1111111111)
+        },
     }
 }
 
