@@ -96,8 +96,12 @@ router.beforeEach((to, from, next) => {
 
 getCode()
 function getCode() {
-  let random = Math.floor(Math.random() * 2) + 1;
-  switch (2) {
+  // let random = Math.floor(Math.random() * 2) + 1;
+  let random = 1;
+  if(localStorage.getItem('SKIN')) {
+    random = localStorage.getItem('SKIN') * 1;
+  }
+  switch (random) {
     case 1:
       require('@/common/css/sk1/sk1.css');
       require ('@/common/css/base.css');

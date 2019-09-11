@@ -6,7 +6,7 @@
             <!-- <dropdown-filter-input value="searchActive" list="activeList" placeholder="全部活动" click-callback="activeCall" key-up-callback='activeUp'></dropdown-filter-input> -->
         </h3>
         <div class="filter-box">
-            <button v-if='permission.act[65] || permission.act[112]' class="dsp-btn btn-blue new-order" ng-click="newOrder()">
+            <button v-if='permission.act[65] || permission.act[112]' class="dsp-btn btn-blue new-order" @click="newOrder()">
                 新建订单
             </button>
         </div>
@@ -141,7 +141,7 @@
                                 <tbody v-for="(i, $mIndex) in item.materialList" :key="$mIndex">
                                 <tr>
                                     <td class="spaceInfo">
-                                        <div class="material-cover" v-if="i.hasImg" ng-style="{'background-image':'url('+i.preview+')'}">
+                                        <div class="material-cover" v-if="i.hasImg" :style="{'background-image':'url('+i.preview+')'}">
                                             <div class="material-cover-mask" ng-click="showImg(i.preview)"></div>
                                         </div>
                                         <div class="material-cover" v-if="i.hasVideo">
@@ -200,7 +200,7 @@
                                                 <span>{{dataType[m.data.type]}}：</span>
                                                 <span>{{m.data.content}}</span><br><br>
                                             </div>
-                                            <div v-if="$first">
+                                            <div v-if="$first == 0">
                                                 点击监测：
                                                 <button class="dsp-btn btn-gray" ng-click="checkUrl(i.clickUrls.join(','))">查看</button><br><br>
                                                 曝光监测：<button class="dsp-btn btn-gray" ng-click="checkUrl(i.viewUrls.join(','))">查看</button><br><br>
@@ -210,8 +210,8 @@
                                     </td>
                                     
                                     <td>
-                                        <a ng-if='permission.act["订单"].sub["诊断"]' href="javascript:;" ng-click="checkCrective(i.id, $event);" ng-class="{red:!i.isError}"><i class="icon-error" ng-if="!i.isError"></i>诊断</a>
-                                        <button ng-if='permission.act["订单"].sub["编辑"]' class="dsp-btn btn-red" ng-click="delCreative(item.id, i.id, pIndex ,$index)">停用</button>
+                                        <a v-if='permission.act[66]' href="javascript:;" ng-click="checkCrective(i.id, $event);" :class="{red:!i.isError}"><i class="icon-error" v-if="!i.isError"></i>诊断</a>
+                                        <button v-if='permission.act[67]' class="dsp-btn btn-red" ng-click="delCreative(item.id, i.id, pIndex ,$index)">停用</button>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -322,6 +322,40 @@ export default {
                     item.preview = v.data.content;
                     break;
                 }
+            }
+        },
+
+        // 新建订单
+        newOrder() {
+            var bidOrder = this.permission.act[65]
+                ,dealOrder = this.permission.act[112];
+            if(bidOrder && !dealOrder) {
+               this.$router.push({  
+                    path:'newOrder',   
+                    query:{           
+                        oType: '1' ,
+                        orderId: '',
+                        activeId: ''
+                    }
+                })
+            } else if (!bidOrder && dealOrder) {
+                this.$router.push({  
+                    path:'newOrder',   
+                    query:{           
+                        oType: '2' ,
+                        orderId: '',
+                        activeId: '0'
+                    }
+                })
+            } else {
+                localStorage.step = 1;
+                layer.open({
+                    type: 1,
+                    title: "新建广告订单",
+                    skin: "layer-style",
+                    area: ['520px', '300px'], //宽高
+                    content: $(".orderType")
+                });
             }
         }
     }
