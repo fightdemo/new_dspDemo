@@ -5,19 +5,19 @@
         <div class="step">
             <div class="step-prompt cl bs">
                 <ul class="cl">
-                    <li ng-class="{'cur-step': step>=1 || orderId != ''}" ng-click="stepJump(1);">
+                    <li :class="{'cur-step': step>=1 || orderId != ''}" @click="stepJump(1);">
                         <i class="step-num">1</i>
                         <span>基本信息</span>
                     </li>
-                    <li ng-class="{'cur-step': step>=2 || orderId != ''}" ng-click="stepJump(2);">
+                    <li :class="{'cur-step': step>=2 || orderId != ''}" @click="stepJump(2);">
                         <i class="step-num">2</i>
                         <span>{{orderType=='bid' ? '定向设置':'选取合约资源'}}</span>
                     </li>
-                    <li ng-class="{'cur-step': step>=3 || orderId != ''}" ng-click="stepJump(3);">
+                    <li :class="{'cur-step': step>=3 || orderId != ''}" @click="stepJump(3);">
                         <i class="step-num">3</i>
                         <span>上传素材</span>
                     </li>
-                    <li ng-class="{'cur-step': step>=4 || orderId != ''}" ng-click="stepJump(4);">
+                    <li :class="{'cur-step': step>=4 || orderId != ''}" @click="stepJump(4);">
                         <i class="step-num">4</i>
                         <span>提交信息</span>
                     </li>
@@ -494,8 +494,8 @@
                     <div class="order-row">广告单元控制</div>
                     <div class="form-group" ng-if="accountType != '0' && isDirect != '1'">
                         <label>利润设置：</label>
-                        <radio module="profit" value="false" callback="switchProfit">否</radio>
-                        <radio module="profit" value="true" callback="switchProfit">是</radio>
+                        <radio-sk module="profit" value="false" callback="switchProfit">否</radio-sk>
+                        <radio-sk module="profit" value="true" callback="switchProfit">是</radio-sk>
                         <input type="text" ng-model="data.profit" class="form-control" ng-disabled="profit=='false'"/>&nbsp;%
                     </div>
 
@@ -542,9 +542,21 @@ export default {
             orderId: "",
             step: 1,
             nextText: "下一步",
+            materialList: [],
         }
     },
+    mounted() {
+        // chooseTime()
+    },
     methods: {
+        stepJump(step) {
+            if (this.step == 4) {
+                this.nextText = "完成";
+            } else {
+                this.nextText = "下一步";
+            }
+            this.next(step);
+        },
         next(step) {
             // var err = inputCheck($scope);
             // if (err) {
@@ -577,6 +589,57 @@ export default {
             //     },300)
             // }
             this.nextText = "下一步";
+        },
+
+        chooseTime(type){
+            var d = new Date(),
+                month = d.getMonth()+ 1,
+                today = d.getFullYear()+"-"+(month < 10 ? "0" + month : month)+"-"+ (d.getDate() < 10 ? "0" + d.getDate():d.getDate()),
+                sMs = new Date(this.activeStartTime).getTime(),
+                tMs = new Date(today).getTime();
+
+            if (this.orderId == "" || type == "select") {
+                this.data.startTime = this.activeStartTime = sMs > tMs ? this.activeStartTime:today;
+                this.data.endTime = this.activeEndTime==""?"":this.activeEndTime;
+            }
+            this.isLongTime = this.activeEndTime=="" ? true:false;
+            this.endTime = this.activeEndTime=="" ? true:false;
+            st = $("#startTime").datetimepicker({
+                format: 'yyyy-mm-dd',
+                todayHighlight: true,
+                minView: 'month',
+                autoclose: 'true',
+                language: "zh-CN",
+                startTime: today,
+                endTime: today
+            });
+
+            et = $("#endTime").datetimepicker({
+                format: 'yyyy-mm-dd',
+                todayHighlight: true,
+                minView: 'month',
+                autoclose: 'true',
+                language: "zh-CN",
+                startTime: today,
+                endTime: today
+            });
+            st.datetimepicker('setStartDate', this.activeStartTime);
+            et.datetimepicker('setStartDate', this.activeStartTime);
+            if (this.isLongTime) {
+                st.datetimepicker('setEndDate', "2222-10-10");
+                et.datetimepicker('setEndDate', "2222-10-10");
+            } else {
+                st.datetimepicker('setEndDate', this.activeEndTime);
+                et.datetimepicker('setEndDate', this.activeEndTime);
+            }
+            st.off('changeDate').on('changeDate', function () {
+                this.data.startTime = st.val();
+                et.datetimepicker('setStartDate', st.val());
+            });
+            et.off('changeDate').on('changeDate', function () {
+                this.data.endTime = et.val();
+                st.datetimepicker('setEndDate', et.val());
+            });
         }
     }
 }

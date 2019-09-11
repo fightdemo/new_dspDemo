@@ -1,30 +1,19 @@
+
 <template>
-    <div class="demo-page" :style="SKIN == '3' ? 'color: #000;' : ''">
-        <div class="page">
-            <h3 class="page-title">基础组件</h3>
-            <!-- <button style="position: absolute; top: 11%; right: 5%;" @click="toggleSkin(SKIN)">切换皮肤</button> -->
-        </div>
-        1、搜索框<search-sk @search="search"></search-sk>
-        2、下拉框（圆角）<Dropdown :list="chartTargetList" title="曝光量" valueName="name" @change="selectRight"></Dropdown><br/>
-        3、按钮（样式一）<button type="button" class="dsp-btn btn-blue newActive">新建活动</button><br/>
-        4、按钮（样式二）<button type="button" class="dsp-btn btn-white newActive">查看报表</button><br/>
-        5、下拉框可输入<dropdownInput :list="chartTargetList"></dropdownInput>
-        6、时间选择<dropdown-date callback="chooseDate" has-all="true"></dropdown-date><br/>
-        7、输入框<div class="form-group">
-            <input type="text" class="form-control"/>
-        </div>
-        8、分页
-        <div class="page" id="pageToolbar"></div>
-        9、单选框和多选框   <radio-sk module="position.income" value="all">不限</radio-sk>
-        <radio-sk module="position.income" value="custom">指定</radio-sk>
-        <div class="form-group" style="padding-left: 66px;" ng-show="position.income=='custom'">
-            <check-sk value="1" module="position.incomes">1000RMB以下</check-sk>
-            <check-sk value="2" module="position.incomes">1001-3000RMB</check-sk>
-            <check-sk value="3" module="position.incomes">3001-5000RMB</check-sk>
-            <check-sk value="4" module="position.incomes">5001-10000RMB</check-sk>
-            <check-sk value="5" module="position.incomes">10000RMB以上</check-sk>
-        </div>
-        10、图表
+        
+    <div class="active-page page ng-scope">
+        <!--页面标题-->
+        <h3 class="page-title">首页</h3>
+
+        <!--总计列表-->
+        <ul class="deal-list">
+            <li v-for="item in targetList" :key="item.name">
+                <p>{{item.name}}</p>
+                <h3 class="ng-binding">{{item.t}}</h3>
+            </li>
+        </ul>
+
+        <!--趋势分析-->
         <div class="chart-box bs">
             <div class="chart-title">
                 <div class="form-group fr">
@@ -39,20 +28,58 @@
             </div>
             <Chart-Box :data="chartData" :targetList="defalutTarget"></Chart-Box>
         </div>
-    </div>
+    </div>    
+
 </template>
 <script>
 import { getNowFormatDate } from "@/common/js/utils";
-import Dropdown from "@/common/old_components/Dropdown";
-import ChartBox from "@/common/components/Chart-Box";
 import Target from "@/common/components/target"; 
 import Chart from "@/common/components/chart";
-import * as Paging from "@/common/js/paging"
+import Dropdown from "@/common/old_components/Dropdown";
+import ChartBox from "@/common/components/Chart-Box";
 export default {
-    data() {
+    data(){
         return {
             sTime: getNowFormatDate() + " " + "00:00:00",
             eTime: getNowFormatDate() + " " + "23:59:59",
+            targetData: {},
+            targetList: [
+                {
+                    name: '代理商当日花费',
+                    t: 'dspCost',
+                    yT: 'ytdspCost',
+                    ybT: 'ybtdspCost'
+                   
+                },{
+                    name: '当日成本',
+                    t: 'adminCost',
+                    yT: 'ytadminCost',
+                    ybT: 'ybtadminCost'
+                },{
+                    name: '当日利润',
+                    t: 'adminProfit',
+                    yT: 'ytadminProfit',
+                    ybT: 'ybtadminProfit'
+                    
+                },{
+                    name: '当日利润率',
+                    t: 'adminProfitRate',
+                    isRate: true,
+                    yT: 'ytadminProfitRate',
+                    ybT: 'ybtadminProfitRate'
+                },{
+                    name: 'CPM',
+                    t: 'cpm',
+                    yT: 'ytcpm',
+                    ybT: 'ybtcpm'
+                },{
+                    name: 'CPC',
+                    t: 'cpc',
+                    yT: 'ytcpc',
+                    ybT: 'ybtcpc'
+                }
+            ],
+            chartData:{},
             chartTargetList: [
                 {id:"click",name:"点击量"},
                 {id:"clickRate",name:"点击率"},
@@ -62,12 +89,6 @@ export default {
                 {id:"cpm",name:"cpm"},
                 {id:"cpc",name:"cpc"},
             ],
-            pageObj: {
-                currentPage: 1,
-                size: 20,
-                total: 0
-            },
-            chartData:{},
             defalutTarget: {
                 data1: [],
                 data2: [],
@@ -77,51 +98,12 @@ export default {
             }
         }
     },
-    mounted() {
-        this.getList()
+    mounted(){
         this.getTarget();
         this.getChartData();
     },
     methods: {
-        // toggleSkin(SKIN) {
-        //     console.log(SKIN)
-        //     if( SKIN == 3 ){
-        //         this.SKIN = 2
-        //     }
-        // },
-        search(val) {
-            console.log( val )
-        },
-        selectRight(val){
-
-        },
-        getList(current, pagesize) {
-            var data = {
-                'page': (current || 1)+"",
-                'size': (pagesize || 20)+"",
-                "sort": ["cTime,1"],
-                'filter': this.filter
-            };
-            this.$ajax({
-                url: '/dsp/creative/list',
-                data: data,
-                load: true
-            }).then(res => {
-                // 获得列表
-                var data = res.data.data;
-                this.list = data;
-
-                $("#pageToolbar").html("");
-                $('#pageToolbar').Paging({
-                    pagesize: pagesize || '20',
-                    current: current || '1',
-                    count: res.data.total,
-                    toolbar: true,
-                    'hash': false,
-                    callback: this.getList
-                });
-            })
-        },
+        // 获取汇总数据
         getTarget(){
             this.$ajax({
                 url: '/dsp/rpt/admin/summary',
@@ -149,6 +131,7 @@ export default {
                 this.targetData = Obj;
             })
         },
+        // 趋势图数据
         getChartData(){
             this.$ajax({
                 url: '/dsp/rpt/admin/time',
@@ -194,25 +177,25 @@ export default {
                 }
             })
         },
+        // 柱状指示
         selectLeft(val) {
             this.defalutTarget.data1 = this.chartData[val.id];
             this.defalutTarget.title1 = val.name;
         },
+        // 线状指示
         selectRight(val) {
             this.defalutTarget.data2 = this.chartData[val.id];
             this.defalutTarget.title2 = val.name;
         }
     },
     components:{
-        'Dropdown': Dropdown,
-        'Chart-Box': ChartBox,
         'target': Target,
         'chart': Chart,
+        'Dropdown': Dropdown,
+        'Chart-Box': ChartBox,
     }
+    
 }
 </script>
 <style lang="less">
-.demo-page{
-    color: #fff;
-}
 </style>

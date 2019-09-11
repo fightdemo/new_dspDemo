@@ -1144,6 +1144,7 @@
     padding: 0 40px;
   }
   .user-box {
+    width: 84%;
     height: 80px;
     padding-top: 22px;
     background: url("../../img/sk3-images/site_top_bg.jpg") no-repeat;

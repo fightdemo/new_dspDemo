@@ -1,8 +1,11 @@
 <template>
     <div class="adv-content">
+        <!-- 用户信息 （皮肤2，3，4使用）-->
+        
+        <!-- 左侧菜单 （皮肤1使用） -->
         <Nav v-if="SKIN == 1" :canLogout="!!permission.act[100]" :navList="navList" :navToolList="navToolList" :balance="balance" :userInfo="userInfo"></Nav>
-        <!-- <NavSk v-if="SKIN == 2" :canLogout="!!permission.act[100]" :navList="navList" :navToolList="navToolList" :balance="balance" :userInfo="userInfo"></NavSk> -->
-        <Menu :navList='navList'  v-if="SKIN == 2"></Menu>
+        <!-- 左侧菜单 （皮肤2，3，4使用）-->
+        <Menu v-if="SKIN == 2" :canLogout="!!permission.act[100]" :navList="navList" :navToolList="navToolList" :balance="balance" :userInfo="userInfo"></Menu>
         <router-view></router-view>
     </div>
 </template>
@@ -10,7 +13,7 @@
 <script>
 import Nav from "@/common/components/Nav";
 import NavSk from "@/common/old_components/Nav-sk";
-import Menu from "@/common/components/Menu";
+import Menu from "@/common/old_components/Menu";
 import navList from "adv@/router/navList";
 
 export default {
@@ -115,7 +118,6 @@ export default {
 .adv-content{
     margin: 0;
     width: 100%;
-    padding-left: 16%;
-    padding-bottom: 100px;
+    padding: 53px 40px 100px 40px;
 }
 </style>

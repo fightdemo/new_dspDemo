@@ -15,7 +15,7 @@ import {
 } from "@/common/js/filter"
 import navList from './router/navList';
 import BaiduMap from 'vue-baidu-map'
-
+// 皮肤1使用的组件
 import imageViewer from '@/common/components/imageViewer'
 import vuePreview from 'vue-preview'
 import mSelect from "@/common/components/select"
@@ -30,6 +30,8 @@ import Search from "@/common/components/search"
 import dspTab from "@/common/components/dspTab"
 import dspButton from "@/common/components/dspButton"
 import Caret from "@/common/components/caret"
+
+//旧皮肤用的组件
 import dropdown from "@/common/old_components/Dropdown";
 import dropdownDate from "@/common/old_components/Dropdown-Date";
 import checksk from "@/common/old_components/check-sk";
@@ -102,10 +104,9 @@ function getCode() {
       Vue.prototype.SKIN = 1;
       break;
     case 2:
-      require('@/common/css/sk2/sk2.css');
       require ('bootstrap/dist/css/bootstrap.css')
       require ('bootstrap/dist/js/bootstrap.js')
-      // require ('bootstrap-vue/dist/bootstrap-vue.css')
+      require('@/common/css/sk2/sk2.css');
       Vue.prototype.SKIN = 2;
       break;
     case 3:

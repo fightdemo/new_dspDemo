@@ -6,14 +6,14 @@
   height: 100%;
   background-color: #3b3e40;
 }
-.nav-top .logo-box {
+.nav-top .logo-box3 {
   width: 100%;
   height: 80px;
   padding-top: 16px;
   padding-left: 35px;
   background: url("../../img/sk3-images/site_top_bg.jpg");
 }
-.nav-top .logo-box .logo {
+.nav-top .logo-box3 .logo {
   width: 170px;
   height: 48px;
   background-size: 100% 100%;

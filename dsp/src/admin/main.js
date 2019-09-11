@@ -119,7 +119,7 @@ function getCode() {
       require('@/common/css/sk3/sk3.css');
       require ('bootstrap/dist/css/bootstrap.css')
       require ('bootstrap/dist/js/bootstrap.js')
-      require ('bootstrap-vue/dist/bootstrap-vue.css')
+      // require ('bootstrap-vue/dist/bootstrap-vue.css')
       Vue.prototype.SKIN = 3;
       break;
   

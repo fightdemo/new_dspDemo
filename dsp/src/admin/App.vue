@@ -1,11 +1,13 @@
 <template>
   <div id="app">
     <Menu :navList='navList'  v-if="SKIN == 2"></Menu>
+    <MenuSk3 :navList='navList'  v-if="SKIN == 3"></MenuSk3>
     <Nav v-if='SKIN == 1' :navList='navList' :userInfo='nameInfo'></Nav>
     <!-- <NavSk v-if="SKIN == 2" :navList='navList' :userInfo='nameInfo'></NavSk> -->
-    <div class="component_con" :style="SKIN == '2' ? 'padding-left:16%;background-color: #2A323C;' : ''">
+    <div class="component_con" :style="SKIN != '1' ? 'padding-left:16%;' : ''">
       <div class="content-box">
         <MenuTool  v-if="SKIN == 2"></MenuTool>
+        <MenuToolSk3  v-if="SKIN == 2"></MenuToolSk3>
         <router-view></router-view>
       </div>
     </div>
@@ -13,8 +15,10 @@
 </template>
 <script>
 import navList from "./router/navList";
-import Menu from "@/common/components/Menu";
-import MenuTool from "@/common/components/MenuTool";
+import Menu from "@/common/old_components/Menu";
+import MenuSk3 from "@/common/old_components/Menu-sk3";
+import MenuTool from "@/common/old_components/MenuTool";
+import MenuToolSk3 from "@/common/old_components/MenuTool-sk3";
 import Nav from "@/common/components/Nav";
 import NavSk from "@/common/old_components/Nav-sk";
 export default {
@@ -33,6 +37,11 @@ export default {
     if( this.SKIN == '2' && this.judgePlatform() ){
       document.getElementsByClassName('component_con')[0].style.paddingLeft = 0 + 'px';
       document.getElementsByClassName('component_con')[0].style.marginTop = 100 + 'px';
+    }
+    if( this.SKIN == 2 ){
+      document.getElementsByClassName("component_con")[0].style.backgroundColor = '#2A323C';
+    }else if( this.SKIN == 3 ){
+      document.getElementsByClassName("component_con")[0].style.backgroundColor = '#fff';
     }
   },
   methods:{
@@ -57,7 +66,9 @@ export default {
   },
   components:{
     'Menu':Menu,
+    'MenuSk3':MenuSk3,
     'MenuTool': MenuTool,
+    'MenuToolSk3':MenuToolSk3,
     'Nav':Nav,
     'NavSk': NavSk
   }
