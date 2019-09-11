@@ -1,11 +1,16 @@
 <template>
-    <qualification :canEdit="!!permission.act[73]" :advID="$route.params.advID"></qualification>
+    <div>
+        <qualificationSk1 v-if="SKIN == 1"></qualificationSk1>
+        <qualificationSk2 v-if="SKIN == 2"></qualificationSk2>
+    </div>
 </template>
 <script>
-import qualification from "adv@/components/qualification";
+import qualificationSk1 from "adv@/components/qualification/qualification-sk1";
+import qualificationSk2 from "adv@/components/qualification/qualification-sk2";
 export default {
     components: {
-        qualification
+        qualificationSk1,
+        qualificationSk2,
     }
 };
 </script>

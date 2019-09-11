@@ -5,8 +5,8 @@
     </div>
 </template>
 <script>
-import activitySk1 from 'adv@/components/delivery/activity-sk1'
-import activitySk2 from 'adv@/components/delivery/activity-sk2'
+import activitySk1 from 'adv@/components/activity/activity-sk1'
+import activitySk2 from 'adv@/components/activity/activity-sk2'
 export default {
     components: {
         activitySk1,

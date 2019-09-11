@@ -189,7 +189,15 @@ var navList = [{
     to: {
       name: 'finance'
     },
-    icon: "icon-widget-icon-label"
+    icon: "icon-widget-icon-label",
+    // hideSub: true,
+    // sub: [{
+    //     name: '财务信息',
+    //     to: {
+    //       name: 'finance'
+    //     }
+    //   }
+    // ]
   }
 ]
 

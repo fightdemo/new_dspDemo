@@ -1,5 +1,6 @@
 <template>
     <div id="app">
+        <button type="button" class="dsp-btn btn-blue newActive" @click="checkout()" style="position:absolute;z-index:99;">切换皮肤</button>
         <router-view></router-view>
     </div>
 </template>
@@ -15,6 +16,14 @@ export default {
             if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
                 document.getElementById("app").style.minWidth = '1100px';
             }
+        },
+        checkout() {
+            let SKIN = localStorage.getItem("SKIN") * 1;
+            if(SKIN) {
+                SKIN = SKIN == 1 ? 2 : 1;
+            }
+            localStorage.setItem("SKIN", SKIN * 1)
+            this.$router.go(0);
         }
     }
 };

@@ -5,7 +5,7 @@
     </div>
 </template>
 <script>
-import indexSk1 from '../components/indexSk1'
+import indexSk1 from '../components/index/index-sk1'
 import indexSk2 from '../components/index/index-sk2'
 export default {
     components: {

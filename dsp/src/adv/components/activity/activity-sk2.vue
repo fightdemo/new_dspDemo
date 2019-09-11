@@ -9,7 +9,7 @@
         <div class="table-box">
             <div class="table-title">
                 <h3 class="table-title-font">活动列表</h3>
-                <button ng-if='obj.permission.act["活动"].sub["新建"]' type="button" class="dsp-btn btn-blue newActive" ui-sref="agent.newActive({'appID':'0'})">新建活动</button>
+                <button ng-if='obj.permission.act["活动"].sub["新建"]' type="button" class="dsp-btn btn-blue newActive" @click="addActivity()">新建活动</button>
             </div>
             <table>
                 <thead>
@@ -130,7 +130,15 @@ export default {
                     callback: this.getList
                 });
             })
-        }
+        },
+
+        // 新建活动
+        addActivity(id) {
+            this.$router.push({
+                name: "delivery.activityAdd",
+                params: { id: id }
+            });
+        },
     }
 }
 </script>
