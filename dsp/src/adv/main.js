@@ -106,18 +106,21 @@ function getCode() {
       require('@/common/css/sk1/sk1.css');
       require ('@/common/css/base.css');
       Vue.prototype.SKIN = 1;
+      localStorage.setItem("SKIN",1)
       break;
     case 2:
       require ('bootstrap/dist/css/bootstrap.css')
       require ('bootstrap/dist/js/bootstrap.js')
       require('@/common/css/sk2/sk2.css');
       Vue.prototype.SKIN = 2;
+      localStorage.setItem("SKIN",2)
       break;
     case 3:
       require('@/common/css/sk3/sk3.css');
       require ('bootstrap/dist/css/bootstrap.css')
       require ('bootstrap/dist/js/bootstrap.js')
       Vue.prototype.SKIN = 3;
+      localStorage.setItem("SKIN",3)
       break;
   
     default:
