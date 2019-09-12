@@ -1,5 +1,5 @@
 <template>
-    <div class="demo-page" :style="SKIN == '3' ? 'color: #000;' : ''">
+    <div v-if="SKIN != 1" class="demo-page" :style="SKIN == '3' ? 'color: #000;' : ''">
         <div class="page">
             <h3 class="page-title">基础组件</h3>
             <!-- <button style="position: absolute; top: 11%; right: 5%;" @click="toggleSkin(SKIN)">切换皮肤</button> -->
@@ -40,6 +40,51 @@
             <Chart-Box :data="chartData" :targetList="defalutTarget"></Chart-Box>
         </div>
     </div>
+    <div v-else>
+        <div class="page">
+            <h3 class="page-title">基础组件</h3>
+        </div>
+        <div class="content">
+            1、搜索框<search @search="search" placeholder="公司名称"></search><br/><br/>
+            2、下拉框（圆角）<dsp-select
+                        title="全部类型"
+                        :list="filterType"
+                        valueName="name"
+                        keyName="action"
+                        @change="selectType"
+                    ></dsp-select><br/><br/>
+            3、按钮（样式一）<dsp-button
+                                type="success"
+                                size="mini"
+                                round
+                                plain
+                            >充值</dsp-button><br/><br/>
+            4、按钮（样式二）<dsp-button
+                                type="primary"
+                                size="mini"
+                                round
+                                plain
+                                @click="showMask('putin',item)"
+                            >充值</dsp-button><br/><br/>
+            6、时间选择<dsp-date></dsp-date><br/><br/>
+            7、输入框<m-Input placeholder="输入订单名称" size="big" maxlength="30"></m-Input>
+            8、分页
+            <!-- <div class="table content">
+                <div class="scroll-wrap">
+                    <div class="h-bar"></div>
+                </div>
+                <admin-page id="pageToolbar" :page="pageObj"></admin-page>  
+            </div> -->
+            <admin-page id="pageToolbar" :page="pageObj"></admin-page>  
+
+            9、单选框和多选框<m-Radio :list="[{'label': 'cpm', 'name': 'CPM'}]" :size="'big'"></m-Radio>
+                            <m-Radio :list="[{'label': 'cpc', 'name': 'CPC'}]" :size="'big'" style="margin-left:50px;"></m-Radio><br/>
+                <mCheck keyName="label">a</mCheck>
+                <mCheck keyName="label">b</mCheck><br/>
+            10、图表
+            <chart :targetList="chartTargetList" :data="chartData"></chart>
+        </div>
+    </div>
 </template>
 <script>
 import { getNowFormatDate } from "@/common/js/utils";
@@ -48,6 +93,9 @@ import ChartBox from "@/common/components/Chart-Box";
 import Target from "@/common/components/target"; 
 import Chart from "@/common/components/chart";
 import * as Paging from "@/common/js/paging"
+import dspSelect from "@/common/components/select";
+import dspDate from "@/common/components/select-data";
+import Page from "@/common/components/page";
 export default {
     data() {
         return {
@@ -74,7 +122,16 @@ export default {
                 title1: "点击量",
                 title2: "曝光量",
                 xAxis: []
-            }
+            },
+            filterType: [
+                { action: "", name: "全部类型" },
+                { action: "purchase", name: "合约扣款" },
+                { action: "deposit", name: "充值" },
+                { action: "withdraw", name: "提取" }
+            ],
+            featureSupportList: [{'label':'1', 'name':'Deeplink'},
+                                {'label':'2', 'name':'一键下载'},
+                                {'label':'3', 'name':'GIF动图'}],
         }
     },
     mounted() {
@@ -83,12 +140,10 @@ export default {
         this.getChartData();
     },
     methods: {
-        // toggleSkin(SKIN) {
-        //     console.log(SKIN)
-        //     if( SKIN == 3 ){
-        //         this.SKIN = 2
-        //     }
-        // },
+        selectType(val) {
+            this.pageObj.currentPage = 1;
+            this.filter.action = val.action;
+        },
         search(val) {
             console.log( val )
         },
@@ -208,6 +263,9 @@ export default {
         'Chart-Box': ChartBox,
         'target': Target,
         'chart': Chart,
+        dspSelect,
+        dspDate,
+        adminPage: Page
     }
 }
 </script>

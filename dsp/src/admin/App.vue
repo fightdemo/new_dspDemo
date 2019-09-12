@@ -1,13 +1,16 @@
 <template>
   <div id="app">
+    <Nav v-if='SKIN == 1' :navList='navList' :userInfo='nameInfo'></Nav>
     <Menu :navList='navList'  v-if="SKIN == 2"></Menu>
     <MenuSk3 :navList='navList'  v-if="SKIN == 3"></MenuSk3>
-    <Nav v-if='SKIN == 1' :navList='navList' :userInfo='nameInfo'></Nav>
     <!-- <NavSk v-if="SKIN == 2" :navList='navList' :userInfo='nameInfo'></NavSk> -->
     <div class="component_con" :style="SKIN != '1' ? 'padding-left:16%;' : ''">
       <div class="content-box">
         <MenuTool  v-if="SKIN == 2"></MenuTool>
-        <MenuToolSk3  v-if="SKIN == 2"></MenuToolSk3>
+        <!-- <MenuToolSk3  v-if="SKIN == 3"></MenuToolSk3> -->
+        <button @click="checkout(1)">切换皮肤1</button>
+        <button @click="checkout(2)">切换皮肤2</button>
+        <button @click="checkout(3)">切换皮肤3</button>
         <router-view></router-view>
       </div>
     </div>
@@ -45,6 +48,10 @@ export default {
     }
   },
   methods:{
+    checkout(adminSkin) {
+      localStorage.setItem("AdminSKIN", adminSkin * 1)
+      this.$router.go(0);
+    },
     judgePlatform(){
       if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
           return true;

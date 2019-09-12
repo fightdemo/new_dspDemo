@@ -102,11 +102,15 @@ Vue.config.productionTip = false
 
 getCode()
 function getCode() {
-  let random = Math.floor(Math.random() * 2) + 1;
-  switch (2) {
+  let random = 1;
+  if(localStorage.getItem('AdminSKIN')) {
+    random = localStorage.getItem('AdminSKIN') * 1;
+  }
+  switch (random) {
     case 1:
       require('@/common/css/sk1/sk1.css');
       Vue.prototype.SKIN = 1;
+      localStorage.setItem("AdminSKIN",1)
       break;
     case 2:
       require('@/common/css/sk2/sk2.css');
@@ -114,6 +118,7 @@ function getCode() {
       require ('bootstrap/dist/js/bootstrap.js')
       // require ('bootstrap-vue/dist/bootstrap-vue.css')
       Vue.prototype.SKIN = 2;
+      localStorage.setItem("AdminSKIN",2)
       break;
     case 3:
       require('@/common/css/sk3/sk3.css');
@@ -121,6 +126,7 @@ function getCode() {
       require ('bootstrap/dist/js/bootstrap.js')
       // require ('bootstrap-vue/dist/bootstrap-vue.css')
       Vue.prototype.SKIN = 3;
+      localStorage.setItem("AdminSKIN",3)
       break;
   
     default:
