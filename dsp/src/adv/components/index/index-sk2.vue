@@ -46,35 +46,41 @@ export default {
             targetList: [
                 {
                     name: '代理商当日花费',
-                    t: 'dspCost',
+                    // t: 'dspCost',
+                    t: '0',
                     yT: 'ytdspCost',
                     ybT: 'ybtdspCost'
                    
                 },{
                     name: '当日成本',
-                    t: 'adminCost',
+                    // t: 'adminCost',
+                    t: '0',
                     yT: 'ytadminCost',
                     ybT: 'ybtadminCost'
                 },{
                     name: '当日利润',
-                    t: 'adminProfit',
+                    // t: 'adminProfit',
+                    t: '0',
                     yT: 'ytadminProfit',
                     ybT: 'ybtadminProfit'
                     
                 },{
                     name: '当日利润率',
-                    t: 'adminProfitRate',
+                    // t: 'adminProfitRate',
+                    t: '0',
                     isRate: true,
                     yT: 'ytadminProfitRate',
                     ybT: 'ybtadminProfitRate'
                 },{
                     name: 'CPM',
-                    t: 'cpm',
+                    // t: 'cpm',
+                    t: '0',
                     yT: 'ytcpm',
                     ybT: 'ybtcpm'
                 },{
                     name: 'CPC',
-                    t: 'cpc',
+                    // t: 'cpc',
+                    t: '0',
                     yT: 'ytcpc',
                     ybT: 'ybtcpc'
                 }
