@@ -44,7 +44,7 @@
         <div class="page">
             <h3 class="page-title">基础组件</h3>
         </div>
-        <div class="content">
+        <div class="content" style="padding: 50px;">
             1、搜索框<search @search="search" placeholder="公司名称"></search><br/><br/>
             2、下拉框（圆角）<dsp-select
                         title="全部类型"
@@ -69,13 +69,13 @@
             6、时间选择<dsp-date></dsp-date><br/><br/>
             7、输入框<m-Input placeholder="输入订单名称" size="big" maxlength="30"></m-Input>
             8、分页
-            <!-- <div class="table content">
+            <div class="table">
                 <div class="scroll-wrap">
                     <div class="h-bar"></div>
                 </div>
                 <admin-page id="pageToolbar" :page="pageObj"></admin-page>  
-            </div> -->
-            <admin-page id="pageToolbar" :page="pageObj"></admin-page>  
+            </div>
+            <!-- <admin-page id="pageToolbar" :page="pageObj"></admin-page>   -->
 
             9、单选框和多选框<m-Radio :list="[{'label': 'cpm', 'name': 'CPM'}]" :size="'big'"></m-Radio>
                             <m-Radio :list="[{'label': 'cpc', 'name': 'CPC'}]" :size="'big'" style="margin-left:50px;"></m-Radio><br/>
