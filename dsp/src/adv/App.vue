@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <button type="button" class="dsp-btn btn-blue newActive" @click="checkout()" style="position:absolute;z-index:99;">切换皮肤</button>
+        <button type="button" class="dsp-btn btn-blue newActive" @click="checkout()" style="position:absolute;z-index:99;">切换皮肤{{SKIN == 2 ? 1 : 2}}</button>
         <router-view></router-view>
     </div>
 </template>

@@ -145,6 +145,20 @@ store.dispatch("getUserInfo").then(res => {
         if(item.name == '系统管理' || item.name == '财务管理') {
           item.hideSub = false;
         }
+        // 皮肤2，3，4报表中心模块 使用此逻辑
+        if(item.name == '报表中心') {
+          var store = item.sub;
+          item.sub = [
+            {
+              name: "效果报表",
+              actionCode: "",
+              to: {
+                  name: 'report.effect'
+              },
+              // sub: store        
+            }
+          ]          
+        }
       })
     }
     Vue.prototype.permission = store.state.common.permission;
