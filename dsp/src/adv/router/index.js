@@ -33,6 +33,8 @@ import DirectIsp from 'adv@/views/report/direct/isp'
 import Deal from 'adv@/views/report/deal'
 import DealPdb from 'adv@/views/report/deal/pdb'
 import DealPd from 'adv@/views/report/deal/pd'
+// 效果报表 皮肤2，3，4使用
+import Effect from 'adv@/views/report/effect'
 // 系统管理
 import System from 'adv@/views/system'
 import SystemBase from 'adv@/views/system/base'
@@ -92,7 +94,8 @@ export default new Router({
         path: 'report',
         name: 'report',
         component: tpl,
-        children: [{
+        children: [
+          {
             path: 'delivery',
             name: 'report.delivery',
             component: Delivery,
@@ -172,6 +175,12 @@ export default new Router({
               component: DealPd,
             }]
           },
+          // 皮肤2，3，4报表中心模板使用此路由
+          {
+            path: 'effect',
+            name: 'report.effect',
+            component: Effect
+          }
         ]
       },
       {
